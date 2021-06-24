@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ldybigdata.iml" filepath="$PROJECT_DIR$/ldybigdata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LdyBigdataGather/ldybigdatagather.iml" filepath="$PROJECT_DIR$/LdyBigdataGather/ldybigdatagather.iml" />
+    </modules>
+  </component>
+</project>

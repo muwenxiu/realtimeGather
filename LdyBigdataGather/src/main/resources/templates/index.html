@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/bootstrap/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="../easyui/themes/color.css"/>
+    <script type="text/javascript" src="../easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="../easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="../easyui/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+<div>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:160px">需要采集的mysqlDB</a>
+</div>
+<div>
+    <table id="" class="easyui-datagrid" title="Basic DataGrid" style="width:1400px"
+           data-options="singleSelect:true,collapsible:true,url:'get/mysqlDatabase',method:'get'">
+        <thead>
+        <tr>
+            <th data-options="field:'value',width:400">需要采集的mysqlDB</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div>
+    <a onclick="setGatherStatus()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:160px">canal channel 信息</a>
+</div>
+<div class="easyui-panel"  >
+    <table  id="gatherStatusTable" class="easyui-datagrid" title="Basic DataGrid" style="width:1400px"
+            data-options="singleSelect:true,collapsible:true,method:'get'">
+        <thead>
+        <tr>
+            <th data-options="field:'canalChannelName',width:400">采集的CanalChannel名称</th>
+            <th data-options="field:'canalChannelStatus',width:400">采集的CanalChannel状态</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div>
+    <a onclick="setCanalProgressTable()"  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:160px">canal采集进度</a>
+</div>
+<div class="easyui-panel"  >
+    <table  id="canalProgressTable" class="easyui-datagrid" title="Basic DataGrid" style="width:1400px"
+            data-options="singleSelect:true,collapsible:true,method:'get'">
+        <thead>
+        <tr>
+            <th data-options="field:'canalName',width:400">CanalChannel名称</th>
+            <th data-options="field:'gatherLogName',width:400">采集日志文件名称</th>
+            <th data-options="field:'gatherPosition',width:400">采集日志文件位置</th>
+            <th data-options="field:'binlogName',width:400">当前binlog文件名称</th>
+            <th data-options="field:'binlogPosition',width:400">当前binlog文件大小</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+
+</body>
+<script>
+$(
+function(){
+    setGatherStatus();
+   setCanalProgressTable();
+    }
+)
+function setGatherStatus(){
+    $("#gatherStatusTable").datagrid({
+        url:"get/getCanalChannel"
+    });
+    //alert("sssss")
+}
+
+function setCanalProgressTable(){
+    $('#canalProgressTable').datagrid({
+        url:'get/getCanalGatherProgress'
+    });
+}
+</script>
+</html>

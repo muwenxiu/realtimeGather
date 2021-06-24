@@ -1,0 +1,98 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: ldy-data-gather
+  datasource:
+    impala:
+      driver-class-name: com.cloudera.impala.jdbc41.Driver
+      jdbc-url: jdbc:impala://172.16.1.92:21050/
+    sqlite:
+      driver-class-name: org.sqlite.JDBC
+      jdbc-url: jdbc:sqlite:E:\work\ldyBigDataCode\Config\DataAnalyseTask.db
+    purchase:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3306/purchase
+      username: ldbigdata
+      password: '#EDC2wss'
+    tender:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3307/tender
+      username: ldbigdata
+      password: '#EDC2wss'
+    auction:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3311/auction
+      username: ldbigdata
+      password: '#EDC2wss'
+    order:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3314/order
+      username: ldbigdata
+      password: '#EDC2wss'
+    contract:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3314/contract
+      username: ldbigdata
+      password: '#EDC2wss'
+    recruit:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3311/recruit
+      username: ldbigdata
+      password: '#EDC2wss'
+    business-opportunity-match:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3317/business_opportunity_match
+      username: ldbigdata
+      password: '#EDC2wss'
+    space:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3311/space
+      username: ldbigdata
+      password: '#EDC2wss'
+    usercenter:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3312/usercenter
+      username: ldbigdata
+      password: '#EDC2wss'
+    uresacl:
+      driver-class-name: org.mariadb.jdbc.Driver
+      jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3310/uresacl
+      username: ldbigdata
+      password: '#EDC2wss'
+
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml
+  mapper-locations:
+    - classpath:mybatis/mapper/**/*.xml
+canal:
+  client:
+    serverIp: 172.16.1.94
+    port: 11111
+    userName:
+    passwd:
+    destinations:
+      - auction_recruit_space
+      - business_opportunity_match
+      - contract_order
+      - purchase
+      - tender
+      - uresacl
+      - usercenter
+  server:
+    #canal 服务配置文件的目录
+    confPath: E:\\software\\canal.deployer-1.1.5\\conf\\
+async:
+  task:
+    core_pool_size: 7
+    max_pool_size: 7
+    queue_capacity: 10000
+    prefix: data-gather-
+  job:
+    core_pool_size: 7
+    max_pool_size: 7
+    queue_capacity: 10000
+    prefix: ldy-job-
+ldy:
+  isSleep: false
+  threadSleep: 100

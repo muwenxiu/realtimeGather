@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ldy.bigdata.gather.mapper.sqlite.GatherDao">
+
+    <select id="getTableNameMatchup" resultType="ldy.bigdata.gather.entities.KeyValue">
+        select
+        lower(mysqlDataBase||'.'|| tableName)               as key, --mysqlTableName ,
+        lower(kudoDataBase||'.ods_'||preFiveDB|| tableName) as value --kuduTableName
+        from DataGatherConfigPE
+        where isRealTime=1
+    </select>
+
+    <select id="getKuduPartitionColumn" resultType="ldy.bigdata.gather.entities.KeyValue">
+        select
+        lower(kudoDataBase||'.ods_'||preFiveDB|| tableName) as key, -- kuduTableName
+        lower(partitionColumn)                              as value
+        from DataGatherConfigPE
+        where isRealTime=1
+    </select>
+
+    <select id="getMysqlColumns" resultType="ldy.bigdata.gather.entities.MysqlColumnInfo">
+        select
+        lower(mysqlTableName) as tableName ,
+        lower(columnName) as columnName,
+        lower(type) as columnType
+        from mysqlColumnType
+    </select>
+
+    <select id="getGatherMysqlDatabase" resultType="ldy.bigdata.gather.entities.SingleData">
+        select distinct lower(mysqlDataBase) as value
+        from DataGatherConfigPE
+        where isRealTime=1
+    </select>
+
+    <select id="getDatabaseInfo" resultType="ldy.bigdata.gather.entities.DatabaseInfo">
+        select mysqlUrl as ip,
+        mysqlPort as port ,
+        mysqlUser as user,
+        mysqlPwd as pwd,
+        mysqlDataBase as dataBase,
+        tableName as tableName
+        from DataGatherConfigPE
+        where isRealTime=1
+    </select>
+
+    <delete id="delMysqlColumnType">
+        delete from mysqlColumnType where mysqlTableName = #{mysqlTableName,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insertMysqlColumnTypeBatch"  >
+        insert into mysqlColumnType
+        (mysqlTableName,columnName,type,position)
+        values
+        <foreach collection="lstMysqlColumnInfo" item="item" separator=",">
+            (#{item.tableName}, #{item.columnName}, #{item.columnType}, #{item.position})
+        </foreach>
+    </insert>
+    <update id="updateRealtimeGather" >
+        update RealtimeGather
+        set rowCount = rowCount +   #{rowCnt, jdbcType=INTEGER},
+        recentDate   = datetime('now','localtime')
+        where mysqlTableName  = #{mysqlTableName, jdbcType=VARCHAR}
+    </update>
+
+
+</mapper>

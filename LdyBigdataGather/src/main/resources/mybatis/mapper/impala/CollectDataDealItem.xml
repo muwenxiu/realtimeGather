@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ldy.bigdata.gather.mapper.impala.CollectDataDealItem">
+    <insert id="insertDealItemPurchase">
+        upsert into ldydb_transaction.dwd_project_deal_item
+        (
+        project_id
+        , project_type_name
+        , partition_year
+        , purchaser_electronic_archive_num
+        , purchaserr_company_name
+        , supplier_electronic_archive_num
+        , supplier_comany_name
+        , supplier_project_id
+        , supplier_user_id
+        , supplier_user_name
+        , directory_id
+        , company_id
+        , supplier_id
+        , supplier_name
+        , is_append
+        , catalog_id
+        , catalog_name
+        , catalog_code
+        , code
+        , name
+        , unit_name
+        , need_time
+        , spec
+        , tech_parameters
+        , use_dept
+        , applied_person_and_phone
+        , sub_company_id
+        , applied_enterprise
+        , applied_enterprise_id
+        , purpose
+        , comment_
+        , quote_status
+        , quote_amount
+        , quote_unit_price
+        , quote_total_price
+        , quote_comment
+        , quote_item
+        , deal_status
+        , deal_unit_price
+        , deal_amount
+        , deal_ration
+        , deal_total_price
+        , deal_description
+        , saving_total_price
+        , saving_total_ration
+        , have_bargain
+        , source_id
+        , source_item_id
+        , is_valid
+        , project_item_id
+        , create_user_id
+        , create_user_name
+        , create_time
+        , update_time
+        , update_user_id
+        , update_user_name
+        , rest_amount
+        , sign_over
+        , org_id
+        , org_path
+        , erp_item_id
+        , user_data
+        , erp_plan_code
+        )
+        select
+        cast(project_id as String) as project_id
+        ,'purchase' as project_type_name
+        ,year(create_time) as partition_year
+        ,null as purchaser_electronic_archive_num
+        ,null as purchaserr_company_name
+        ,null as supplier_electronic_archive_num
+        ,null as supplier_comany_name
+        , supplier_project_id
+        , supplier_user_id
+        , supplier_user_name
+        , directory_id
+        , company_id
+        , supplier_id
+        , supplier_name
+        , is_append
+        , catalog_id
+        , catalog_name
+        , catalog_code
+        , code
+        , name
+        , unit_name
+        , need_time
+        , spec
+        , tech_parameters
+        , use_dept
+        , applied_person_and_phone
+        , sub_company_id
+        , applied_enterprise
+        , applied_enterprise_id
+        , purpose
+        , comment_
+        , quote_status
+        , quote_amount
+        , quote_unit_price
+        , quote_total_price
+        , quote_comment
+        , quote_item
+        , deal_status
+        , deal_unit_price
+        , deal_amount
+        , deal_ration
+        , deal_total_price
+        , deal_description
+        , saving_total_price
+        , saving_total_ration
+        , have_bargain
+        , source_id
+        , source_item_id
+        , is_valid
+        , project_item_id
+        , create_user_id
+        , create_user_name
+        , create_time
+        , update_time
+        , update_user_id
+        , update_user_name
+        , rest_amount
+        , sign_over
+        , org_id
+        , cast(org_path as string) as org_path
+        , erp_item_id
+        , user_data
+        , erp_plan_code
+        from ldydb_transaction. ods_tra_purchase_supplier_project_item_origin q
+        WHERE  q.deal_status = 3 and q.id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </insert>
+    <insert id="insertDealItemTender">
+        upsert into ldydb_transaction.dwd_project_deal_item
+        (
+        project_id
+        , project_type_name
+        , partition_year
+        , purchaser_electronic_archive_num
+        , purchaserr_company_name
+        , supplier_electronic_archive_num
+        , supplier_comany_name
+        , supplier_project_id
+        , supplier_user_id
+        , supplier_user_name
+        , directory_id
+        , company_id
+        , supplier_id
+        , supplier_name
+        , is_append
+        , catalog_id
+        , catalog_name
+        , catalog_code
+        , code
+        , name
+        , unit_name
+        , need_time
+        , spec
+        , tech_parameters
+        , use_dept
+        , applied_person_and_phone
+        , sub_company_id
+        , applied_enterprise
+        , applied_enterprise_id
+        , purpose
+        , comment_
+        , quote_status
+        , quote_amount
+        , quote_unit_price
+        , quote_total_price
+        , quote_comment
+        , quote_item
+        , deal_status
+        , deal_unit_price
+        , deal_amount
+        , deal_ration
+        , deal_total_price
+        , deal_description
+        , saving_total_price
+        , saving_total_ration
+        , have_bargain
+        , source_id
+        , source_item_id
+        , is_valid
+        , project_item_id
+        , create_user_id
+        , create_user_name
+        , create_time
+        , update_time
+        , update_user_id
+        , update_user_name
+        , rest_amount
+        , sign_over
+        , org_id
+        , org_path
+        , erp_item_id
+        , user_data
+        , erp_plan_code
+        )
+        select
+        cast( project_id as String) project_id
+        ,'bidding' as project_type_name
+        ,year(create_time) as partition_year
+        ,null as purchaser_electronic_archive_num
+        ,null as purchaserr_company_name
+        ,null as supplier_electronic_archive_num
+        ,null as supplier_comany_name
+        ,null as supplier_project_id
+        ,null as supplier_user_id
+        ,null as supplier_user_name
+        , directory_id
+        , company_id
+        , supplier_id
+        , supplier_name
+        ,null as is_append
+        , catalog_id
+        , catalog_name
+        , catalog_code
+        , code
+        , name
+        , unit_name
+        , need_time
+        , spec
+        , tech_parameters
+        , use_dept
+        , applied_person_and_phone
+        , sub_company_id
+        , applied_enterprise
+        , applied_enterprise_id
+        , purpose
+        , comment_
+        , quote_status
+        , quote_amount
+        , quote_unit_price
+        , quote_total_price
+        , quote_comment
+        , quote_item
+        , deal_status
+        ,deal_price as deal_unit_price
+        ,deal_number as deal_amount
+        ,deal_ratio as deal_ration
+        ,deal_total_price
+        ,deal_instruction as deal_description
+        ,null as saving_total_price
+        ,null as saving_total_ration
+        ,null as have_bargain
+        , source_id
+        ,null as source_item_id
+        ,null as is_valid
+        ,null as project_item_id
+        , create_user_id
+        , create_user_name
+        , create_time
+        , update_time
+        , update_user_id
+        , update_user_name
+        , rest_amount
+        , sign_over
+        , org_id
+        , org_path
+        , erp_item_id
+        , user_data
+        , erp_plan_code
+        from ldydb_transaction. ods_tra_bid_supplier_project_item_origin q
+        WHERE q.deal_status = 1 and q.id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </insert>
+    <insert id="insertDealItemAuction">
+        upsert into ldydb_transaction.dwd_project_deal_item
+        (
+        project_id
+        , project_type_name
+        , partition_year
+        , purchaser_electronic_archive_num
+        , purchaserr_company_name
+        , supplier_electronic_archive_num
+        , supplier_comany_name
+        , supplier_project_id
+        , supplier_user_id
+        , supplier_user_name
+        , directory_id
+        , company_id
+        , supplier_id
+        , supplier_name
+        , is_append
+        , catalog_id
+        , catalog_name
+        , catalog_code
+        , code
+        , name
+        , unit_name
+        , need_time
+        , spec
+        , tech_parameters
+        , use_dept
+        , applied_person_and_phone
+        , sub_company_id
+        , applied_enterprise
+        , applied_enterprise_id
+        , purpose
+        , comment_
+        , quote_status
+        , quote_amount
+        , quote_unit_price
+        , quote_total_price
+        , quote_comment
+        , quote_item
+        , deal_status
+        , deal_unit_price
+        , deal_amount
+        , deal_ration
+        , deal_total_price
+        , deal_description
+        , saving_total_price
+        , saving_total_ration
+        , have_bargain
+        , source_id
+        , source_item_id
+        , is_valid
+        , project_item_id
+        , create_user_id
+        , create_user_name
+        , create_time
+        , update_time
+        , update_user_id
+        , update_user_name
+        , rest_amount
+        , sign_over
+        , org_id
+        , org_path
+        , erp_item_id
+        , user_data
+        , erp_plan_code
+        )
+        select
+        cast(project_id as string) as project_id
+        ,'auction' as project_type_name
+        ,year(create_time) as partition_year
+        ,null as purchaser_electronic_archive_num
+        ,null as purchaserr_company_name
+        ,null as supplier_electronic_archive_num
+        ,null as supplier_comany_name
+        ,supplier_project_id
+        ,null as supplier_user_id
+        ,null as supplier_user_name
+        , directory_id
+        , company_id
+        , supplier_id
+        , supplier_name
+        , is_append
+        , catalog_id
+        , catalog_name
+        , catalog_code
+        , code
+        , name
+        , unit_name
+        , need_time
+        , spec
+        , tech_parameters
+        , use_dept
+        , applied_person_and_phone
+        , sub_company_id
+        , applied_enterprise
+        , applied_enterprise_id
+        , purpose
+        ,null as comment_
+        , quote_status
+        , quote_amount
+        , quote_unit_price
+        , quote_total_price
+        , quote_comment
+        , quote_item
+        , deal_status
+        , deal_unit_price
+        , deal_amount
+        , deal_ration
+        , deal_total_price
+        , deal_description
+        , saving_total_price
+        , saving_total_ration
+        , have_bargain
+        , source_id
+        ,null as source_item_id
+        ,null as is_valid
+        , project_item_id
+        , create_user_id
+        , create_user_name
+        , create_time
+        , update_time
+        , update_user_id
+        , update_user_name
+        , rest_amount
+        , sign_over
+        , org_id
+        , org_path
+        , erp_item_id
+        , user_data
+        , erp_plan_code
+        from ldydb_transaction. ods_tra_auction_supplier_project_item_origin q
+        WHERE  q.deal_status =3 and q.id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </insert>
+    <insert id="insertDealItemOrder">
+        upsert into ldydb_transaction.dwd_project_deal_item
+        (
+        project_id
+        , project_type_name
+        , partition_year
+        , purchaser_electronic_archive_num
+        , purchaserr_company_name
+        , supplier_electronic_archive_num
+        , supplier_comany_name
+        , supplier_project_id
+        , supplier_user_id
+        , supplier_user_name
+        , directory_id
+        , company_id
+        , supplier_id
+        , supplier_name
+        , is_append
+        , catalog_id
+        , catalog_name
+        , catalog_code
+        , code
+        , name
+        , unit_name
+        , need_time
+        , spec
+        , tech_parameters
+        , use_dept
+        , applied_person_and_phone
+        , sub_company_id
+        , applied_enterprise
+        , applied_enterprise_id
+        , purpose
+        , comment_
+        , quote_status
+        , quote_amount
+        , quote_unit_price
+        , quote_total_price
+        , quote_comment
+        , quote_item
+        , deal_status
+        , deal_unit_price
+        , deal_amount
+        , deal_ration
+        , deal_total_price
+        , deal_description
+        , saving_total_price
+        , saving_total_ration
+        , have_bargain
+        , source_id
+        , source_item_id
+        , is_valid
+        , project_item_id
+        , create_user_id
+        , create_user_name
+        , create_time
+        , update_time
+        , update_user_id
+        , update_user_name
+        , rest_amount
+        , sign_over
+        , org_id
+        , org_path
+        , erp_item_id
+        , user_data
+        , erp_plan_code
+        )
+        SELECT
+        cast(i.order_id as string) project_id
+        ,'order' as project_type_name
+        ,year(i.create_time) as partition_year
+        ,null as purchaser_electronic_archive_num
+        ,null as purchaserr_company_name
+        ,null as supplier_electronic_archive_num
+        ,null as supplier_comany_name
+        ,null as supplier_project_id
+        ,null as supplier_user_id
+        ,null as supplier_user_name
+        , i.directory_id
+        , i.company_id
+        ,a. supplier_id
+        ,a. supplier_name
+        ,null as is_append
+        ,null as catalog_id
+        ,null as catalog_name
+        ,null as catalog_code
+        ,null as code
+        , i.name
+        , i.unit_name
+        , i.need_time
+        , i.spec
+        , i.tech_parameters
+        , i.use_dept
+        , i.applied_person_and_phone
+        , i.sub_company_id
+        , i.applied_enterprise
+        , i.applied_enterprise_id
+        , i.purpose
+        ,i.item_comment as comment_
+        ,null as quote_status
+        ,i.send_number as quote_amount
+        ,i.quote_unit_price
+        ,i.quote_total_price
+        ,null as quote_comment
+        ,null as quote_item
+        ,null as deal_status
+        ,null as deal_unit_price
+        ,i.remain_number deal_amount
+        ,null as deal_ration
+        ,i.actual_price deal_total_price
+        ,null as deal_description
+        ,null as saving_total_price
+        ,null as saving_total_ration
+        ,null as have_bargain
+        ,i.data_source_id as source_id
+        ,i.directory_source_id as source_item_id
+        ,null as is_valid
+        ,null as project_item_id
+        , i.create_user_id
+        , i.create_user_name
+        , i.create_time
+        , i.update_time
+        , i.update_user_id
+        , i.update_user_name
+        , i.rest_amount
+        , i.sign_over
+        , i.org_id
+        , i.org_path
+        , i.erp_item_id
+        , i.user_data
+        , i.erp_plan_code
+        from ldydb_transaction.ods_tra_order_item_origin i
+        left join ldydb_transaction.ods_tra_order_main_origin a
+        on i.order_id = a.id
+        and i.create_year = a.Create_year
+        WHERE i.id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </insert>
+    <insert id="insertDealItemContract">
+        upsert into ldydb_transaction.dwd_project_deal_item
+        (
+        project_id
+        , project_type_name
+        , partition_year
+        , purchaser_electronic_archive_num
+        , purchaserr_company_name
+        , supplier_electronic_archive_num
+        , supplier_comany_name
+        , supplier_project_id
+        , supplier_user_id
+        , supplier_user_name
+        , directory_id
+        , company_id
+        , supplier_id
+        , supplier_name
+        , is_append
+        , catalog_id
+        , catalog_name
+        , catalog_code
+        , code
+        , name
+        , unit_name
+        , need_time
+        , spec
+        , tech_parameters
+        , use_dept
+        , applied_person_and_phone
+        , sub_company_id
+        , applied_enterprise
+        , applied_enterprise_id
+        , purpose
+        , comment_
+        , quote_status
+        , quote_amount
+        , quote_unit_price
+        , quote_total_price
+        , quote_comment
+        , quote_item
+        , deal_status
+        , deal_unit_price
+        , deal_amount
+        , deal_ration
+        , deal_total_price
+        , deal_description
+        , saving_total_price
+        , saving_total_ration
+        , have_bargain
+        , source_id
+        , source_item_id
+        , is_valid
+        , project_item_id
+        , create_user_id
+        , create_user_name
+        , create_time
+        , update_time
+        , update_user_id
+        , update_user_name
+        , rest_amount
+        , sign_over
+        , org_id
+        , org_path
+        , erp_item_id
+        , user_data
+        , erp_plan_code
+        )
+        SELECT
+        cast(i.contract_id as string) as project_id
+        ,'contract' as project_type_name
+        ,year(i.create_time) as partition_year
+        ,null as purchaser_electronic_archive_num
+        ,null as purchaserr_company_name
+        ,null as supplier_electronic_archive_num
+        ,null as supplier_comany_name
+        ,null as supplier_project_id
+        ,null as supplier_user_id
+        ,null as supplier_user_name
+        ,i.directory_id
+        , a.company_id
+        , a.head_name_b_id as supplier_id
+        , a.head_name_b as supplier_name
+        ,null as is_append
+        ,null as catalog_id
+        ,null as catalog_name
+        ,null as catalog_code
+        ,null as code
+        , i.name
+        , i.unit_name
+        , i.need_time
+        , i.spec
+        , i.tech_parameters
+        , i.use_dept
+        , i.applied_person_and_phone
+        , i.sub_company_id
+        , i.applied_enterprise
+        , i.applied_enterprise_id
+        , i.purpose
+        ,i.comment_ as comment_
+        ,null as quote_status
+        ,i.purchase_amount as quote_amount
+        ,i.quote_unit_price
+        ,null as quote_total_price
+        ,null as quote_comment
+        ,null as quote_item
+        ,null as deal_status
+        ,i.source_unit_price as deal_unit_price
+        ,i.source_amount as deal_amount
+        ,null as deal_ration
+        ,null as deal_total_price
+        ,null as deal_description
+        ,null as saving_total_price
+        ,null as saving_total_ration
+        ,null as have_bargain
+        ,i.project_id as source_id
+        ,i.item_id as source_item_id
+        ,null as is_valid
+        ,null as project_item_id
+        , i.create_user_id
+        , i.create_user_name
+        , i.create_time
+        , i.update_time
+        , i.update_user_id
+        , i.update_user_name
+        , i.rest_amount
+        , i.sign_over
+        , i.org_id
+        , i.org_path
+        , i.erp_item_id
+        , i.user_data
+        , i.erp_plan_code
+        from ldydb_transaction.ods_tra_contract_item_origin i
+        left join ldydb_transaction.ods_tra_contract_main_origin a
+        on i.contract_id = a.id
+        WHERE i.id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </insert>
+</mapper>

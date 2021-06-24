@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ldy.bigdata.gather.mapper.impala.CollectDataQuoteItem">
+    <insert id="insertQuoteItemPurchase">
+        upsert into ldydb_transaction.dwd_supplier_item_quote_process
+        (
+        supplier_id
+        ,project_type_name
+        ,project_id
+        ,directory_id
+        ,create_time
+        ,partition_year
+        ,supplier_electronic_archive_num
+        ,supplier_comany_name
+        ,purchaser_electronic_archive_num
+        ,purchaserr_company_name
+        ,catalog_id
+        ,catalog_name
+        ,catalog_code
+        ,code
+        ,directory_name
+        ,unit_name
+        ,need_time
+        ,spec
+        ,tech_parameters
+        ,quote_amount
+        ,quote_unit_price
+        ,quote_total_price
+        ,quote_comment
+        ,source_id
+        ,company_id
+        ,supplier_project_id
+        ,supplier_name
+        ,supplier_user_id
+        ,supplier_user_name
+        ,create_user_id
+        ,create_user_name
+        ,update_time
+        ,update_user_id
+        ,update_user_name
+        )
+        select
+        q.supplier_id
+        ,'purchase' as project_type_name
+        ,q.project_id
+        ,q.project_item_id as directory_id
+        ,q.create_time
+        , year(q.create_time) as partition_year
+        ,null as supplier_electronic_archive_num
+        ,null as supplier_comany_name
+        ,null as purchaser_electronic_archive_num
+        ,null as purchaserr_company_name
+        ,null as catalog_id
+        ,null as catalog_name
+        ,null as catalog_code
+        ,null as code
+        ,q.name as directory_name
+        ,null as unit_name
+        ,null as need_time
+        ,null as spec
+        ,null as tech_parameters
+        ,q.quote_amount
+        ,q.quote_unit_price
+        ,q.quote_total_price
+        ,q.quote_comment
+        ,null as source_id
+        ,q.company_id
+        ,null as supplier_project_id
+        ,q.supplier_name
+        ,q.supplier_user_id
+        ,q.supplier_user_name
+        ,q.create_user_id
+        ,q.create_user_name
+        ,q.update_time
+        ,q.update_user_id
+        ,q.update_user_name
+        from  ldydb_transaction.ods_tra_purchase_supplier_project_item_history  q
+        WHERE  q.id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </insert>
+    <insert id="insertQuoteItemTender">
+        upsert into ldydb_transaction.dwd_supplier_item_quote_process
+        (
+        supplier_id
+        ,project_type_name
+        ,project_id
+        ,directory_id
+        ,create_time
+        ,partition_year
+        ,supplier_electronic_archive_num
+        ,supplier_comany_name
+        ,purchaser_electronic_archive_num
+        ,purchaserr_company_name
+        ,catalog_id
+        ,catalog_name
+        ,catalog_code
+        ,code
+        ,directory_name
+        ,unit_name
+        ,need_time
+        ,spec
+        ,tech_parameters
+        ,quote_amount
+        ,quote_unit_price
+        ,quote_total_price
+        ,quote_comment
+        ,source_id
+        ,company_id
+        ,supplier_project_id
+        ,supplier_name
+        ,supplier_user_id
+        ,supplier_user_name
+        ,create_user_id
+        ,create_user_name
+        ,update_time
+        ,update_user_id
+        ,update_user_name
+        )
+        select
+        q.supplier_id
+        ,'bidding' as project_type_name
+        ,q.project_id
+        ,q.directory_id
+        ,q.create_time
+        ,year(q.create_time) as partition_year
+        ,null as supplier_electronic_archive_num
+        ,null as supplier_comany_name
+        ,null as purchaser_electronic_archive_num
+        ,null as purchaserr_company_name
+        ,q.catalog_id
+        ,q.catalog_name
+        ,q.catalog_code
+        ,q.code
+        ,q.name as directory_name
+        ,q.unit_name
+        ,q.need_time
+        ,q.spec
+        ,q.tech_parameters
+        ,q.quote_amount
+        ,q.quote_unit_price
+        ,q.quote_total_price
+        ,q.comment_ as quote_comment
+        ,q.source_id
+        ,q.company_id
+        ,null as supplier_project_id
+        ,q.supplier_name
+        ,null as supplier_user_id
+        ,null as supplier_user_name
+        ,q.create_user_id
+        ,q.create_user_name
+        ,q.update_time
+        ,q.update_user_id
+        ,q.update_user_name
+        from  ldydb_transaction.ods_tra_bid_supplier_project_item_history q
+        WHERE q.id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </insert>
+    <insert id="insertQuoteItemAuction1">
+        upsert into ldydb_transaction.dwd_supplier_item_quote_process
+        (
+        supplier_id
+        ,project_type_name
+        ,project_id
+        ,directory_id
+        ,create_time
+        ,partition_year
+        ,supplier_electronic_archive_num
+        ,supplier_comany_name
+        ,purchaser_electronic_archive_num
+        ,purchaserr_company_name
+        ,catalog_id
+        ,catalog_name
+        ,catalog_code
+        ,code
+        ,directory_name
+        ,unit_name
+        ,need_time
+        ,spec
+        ,tech_parameters
+        ,quote_amount
+        ,quote_unit_price
+        ,quote_total_price
+        ,quote_comment
+        ,source_id
+        ,company_id
+        ,supplier_project_id
+        ,supplier_name
+        ,supplier_user_id
+        ,supplier_user_name
+        ,create_user_id
+        ,create_user_name
+        ,update_time
+        ,update_user_id
+        ,update_user_name
+        )
+        select
+        q.supplier_id
+        ,'auction' as project_type_name
+        ,q.project_id
+        ,q.directory_id
+        ,q.create_time
+        ,year(quote_time) as partition_year
+        ,null as supplier_electronic_archive_num
+        ,null as supplier_comany_name
+        ,null as purchaser_electronic_archive_num
+        ,null as purchaserr_company_name
+        ,i.catalog_id
+        ,i.catalog_name
+        ,i.catalog_code
+        ,q.code
+        ,q.directory_name
+        ,q.unit_name
+        ,i.need_time
+        ,q.spec
+        ,q.tech_parameters
+        ,q.purchase_amount as quote_amount
+        ,i.average_unit_price as quote_unit_price
+        ,q.quote_price as quote_total_price
+        ,i.comment_ as quote_comment
+        ,i.source_id
+        ,q.company_id
+        ,null as supplier_project_id
+        ,q.supplier_name
+        ,q.supplier_user_id
+        ,q.supplier_user_name
+        ,q.create_user_id
+        ,q.create_user_name
+        ,q.update_time
+        ,q.update_user_id
+        ,q.update_user_name
+        from  ldydb_transaction.ods_tra_auction_supplier_quote_recode q
+        inner join ldydb_transaction.ods_tra_auction_project_item  i
+        on q.project_id =i.project_id
+        and q.directory_id =i.directory_id
+        where q.directory_id is not null
+        and q.id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </insert>
+    <insert id="insertQuoteItemAuction2">
+        upsert into ldydb_transaction.dwd_supplier_item_quote_process
+        (
+        supplier_id
+        ,project_type_name
+        ,project_id
+        ,directory_id
+        ,create_time
+        ,partition_year
+        ,supplier_electronic_archive_num
+        ,supplier_comany_name
+        ,purchaser_electronic_archive_num
+        ,purchaserr_company_name
+        ,catalog_id
+        ,catalog_name
+        ,catalog_code
+        ,code
+        ,directory_name
+        ,unit_name
+        ,need_time
+        ,spec
+        ,tech_parameters
+        ,quote_amount
+        ,quote_unit_price
+        ,quote_total_price
+        ,quote_comment
+        ,source_id
+        ,company_id
+        ,supplier_project_id
+        ,supplier_name
+        ,supplier_user_id
+        ,supplier_user_name
+        ,create_user_id
+        ,create_user_name
+        ,update_time
+        ,update_user_id
+        ,update_user_name
+        )
+        select
+        q.supplier_id
+        ,'auction' as project_type_name
+        ,q.project_id
+        ,i.directory_id
+        ,q.quote_time as create_time
+        ,  year(quote_time) as create_year
+        ,null as supplier_electronic_archive_num
+        ,null as supplier_comany_name
+        ,null as purchaser_electronic_archive_num
+        ,null as purchaserr_company_name
+        ,i.catalog_id
+        ,i.catalog_name
+        ,i.catalog_code
+        ,q.code
+        ,i.name directory_name
+        ,i.unit_name
+        ,i.need_time
+        ,q.spec
+        ,q.tech_parameters
+        ,q.purchase_amount    as quote_amount
+        ,i.average_unit_price as quote_unit_price
+        ,-1 as quote_total_price
+        ,i.comment_ as quote_comment
+        ,i.source_id
+        ,q.company_id
+        ,null as supplier_project_id
+        ,q.supplier_name
+        ,q.supplier_user_id
+        ,q.supplier_user_name
+        ,q.create_user_id
+        ,q.create_user_name
+        ,q.update_time
+        ,q.update_user_id
+        ,q.update_user_name
+        from  ldydb_transaction. ods_tra_auction_supplier_quote_recode q
+        inner join ldydb_transaction. ods_tra_auction_project_item     i
+        on q.project_id =i.project_id
+        where q.directory_id is null
+        and q.id in
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </insert>
+
+</mapper>

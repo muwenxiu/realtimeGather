@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration monitorInterval="5">
+    <Properties>
+        <property name="LOG_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
+        <property name="FILE_PATH" value="/home/ldydb/realTimeSys/log"/>
+        <property name="FILE_NAME" value="dataGather"/>
+    </Properties>
+    <appenders>
+        <console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
+        </console>
+
+        <RollingFile name="RollingFileInfo" fileName="${FILE_PATH}/${FILE_NAME}.log"
+                     filePattern="${FILE_PATH}/${FILE_NAME}_INFO-%d{yyyy-MM-dd}_%i.log.gz">
+            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <!--<SizeBasedTriggeringPolicy size="1000MB"/>-->
+            </Policies>
+            <!--
+            <DefaultRolloverStrategy max="15">
+                <Delete maxDepth="1">
+                    <IfFileName glob="${FILE_NAME}_.*.log.gz"/>
+                    <IfLastModified age="5d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+            -->
+        </RollingFile>
+        <RollingFile name="RollingFileError" fileName="${FILE_PATH}/${FILE_NAME}_ERROR.log"
+                     filePattern="${FILE_PATH}/${FILE_NAME}_ERROR-%d{yyyy-MM-dd}_%i.log.gz">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <!-- <SizeBasedTriggeringPolicy size="1000MB"/>-->
+            </Policies>
+            <!--
+           <DefaultRolloverStrategy max="15">
+               <Delete maxDepth="1">
+                   <IfFileName glob="${FILE_NAME}_.*.log.gz"/>
+                   <IfLastModified age="5d"/>
+               </Delete>
+           </DefaultRolloverStrategy>
+           -->
+        </RollingFile>
+
+    </appenders>
+
+    <loggers>
+        <logger name="org.mybatis" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </logger>
+        <Logger name="org.springframework" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <root level="info">
+            <!----><appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo"/>
+            <appender-ref ref="RollingFileError"/>
+        </root>
+        <!--
+        <AsyncLogger name="AsyncLogger" level="trace" includeLocation="true" additivity="false">
+            <appender-ref ref="RollingFileInfo"/>
+        </AsyncLogger>-->
+    </loggers>
+</configuration>

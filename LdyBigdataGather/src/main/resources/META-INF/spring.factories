@@ -1,0 +1,5 @@
+org.springframework.boot.SpringApplicationRunListener=\
+ldy.bigdata.gather.listener.Ldy1SpringApplicationRunListener
+
+org.springframework.context.ApplicationContextInitializer=\
+ldy.bigdata.gather.listener.Ldy2ApplicationContextInitializer
