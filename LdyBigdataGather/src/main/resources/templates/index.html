@@ -12,9 +12,12 @@
 </head>
 <body>
 <div>
-    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:160px">需要采集的mysqlDB</a>
+    <a  onclick="getTableInfo()" href="gatherTableInfo" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+       style="width:160px">采集表信息</a>
 </div>
+
 <div>
+    <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:160px">需要采集的mysqlDB</a>
     <table id="" class="easyui-datagrid" title="Basic DataGrid" style="width:1400px"
            data-options="singleSelect:true,collapsible:true,url:'get/mysqlDatabase',method:'get'">
         <thead>
@@ -24,12 +27,12 @@
         </thead>
     </table>
 </div>
-<div>
-    <a onclick="setGatherStatus()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:160px">canal channel 信息</a>
-</div>
-<div class="easyui-panel"  >
-    <table  id="gatherStatusTable" class="easyui-datagrid" title="Basic DataGrid" style="width:1400px"
-            data-options="singleSelect:true,collapsible:true,method:'get'">
+
+<div class="easyui-panel">
+    <a onclick="setGatherStatus()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+       style="width:160px">canal channel 信息</a>
+    <table id="gatherStatusTable" class="easyui-datagrid" title="Basic DataGrid" style="width:1400px"
+           data-options="singleSelect:true,collapsible:true,method:'get'">
         <thead>
         <tr>
             <th data-options="field:'canalChannelName',width:400">采集的CanalChannel名称</th>
@@ -38,24 +41,23 @@
         </thead>
     </table>
 </div>
-<div>
-    <a onclick="setCanalProgressTable()"  href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" style="width:160px">canal采集进度</a>
-</div>
-<div class="easyui-panel"  >
-    <table  id="canalProgressTable" class="easyui-datagrid" title="Basic DataGrid" style="width:1400px"
-            data-options="singleSelect:true,collapsible:true,method:'get'">
+
+<div class="easyui-panel">
+    <a onclick="setCanalProgressTable()" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'"
+       style="width:160px">canal采集进度</a>
+    <table id="canalProgressTable" class="easyui-datagrid" title="Basic DataGrid"
+           data-options="singleSelect:true,collapsible:true,method:'get'">
         <thead>
         <tr>
-            <th data-options="field:'canalName',width:400">CanalChannel名称</th>
-            <th data-options="field:'gatherLogName',width:400">采集日志文件名称</th>
-            <th data-options="field:'gatherPosition',width:400">采集日志文件位置</th>
+            <th data-options="field:'canalName',width:300">CanalChannel名称</th>
+            <th data-options="field:'gatherLogName',width:300">采集日志文件名称</th>
+            <th data-options="field:'gatherPosition',width:300">采集日志文件位置</th>
+            <th data-options="field:'binlogPosition',width:300">当前binlog文件大小</th>
             <th data-options="field:'binlogName',width:400">当前binlog文件名称</th>
-            <th data-options="field:'binlogPosition',width:400">当前binlog文件大小</th>
         </tr>
         </thead>
     </table>
 </div>
-
 
 </body>
 <script>
@@ -73,9 +75,19 @@ function setGatherStatus(){
 }
 
 function setCanalProgressTable(){
-    $('#canalProgressTable').datagrid({
-        url:'get/getCanalGatherProgress'
-    });
+    $.ajax({
+        type:'post',
+        url:'get/getCanalGatherProgress',
+        success: function(result)
+        {
+            $('#canalProgressTable').datagrid('loadData' ,result);
+        }
+    })
 }
+function getTableInfo(){
+
+}
+
+
 </script>
 </html>

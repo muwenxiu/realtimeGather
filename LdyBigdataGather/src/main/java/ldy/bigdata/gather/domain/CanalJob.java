@@ -55,7 +55,7 @@ public class CanalJob {
     private boolean isSleep = true;
 
     public void runEx() {
-        runGatherData();
+        //runGatherData();
     }
 
     private void runGatherData() {
