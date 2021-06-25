@@ -3,6 +3,20 @@ server:
 spring:
   application:
     name: ldy-data-gather
+  mvc:
+    view:
+      prefix: classpath:/templates/
+      suffix: .html
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+  messages:
+    basename: international.login
   datasource:
     impala:
       driver-class-name: com.cloudera.impala.jdbc41.Driver

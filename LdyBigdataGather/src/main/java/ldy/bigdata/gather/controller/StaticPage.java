@@ -14,11 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class StaticPage {
     static final Logger log = LoggerFactory.getLogger(StaticPage.class);
 
-//    @RequestMapping(value = {"/","/index.html","/index"},method = RequestMethod.GET)
-//    public String index() {
-//        log.info("in index");
-//        return "index";
-//    }
+    @RequestMapping(value = {"/index.html"}, method = RequestMethod.GET)
+    public String index() {
+        log.info("in index");
+        return "index";
+    }
 
     @GetMapping("/second")
     public ModelAndView second(Model model) {
@@ -26,6 +26,7 @@ public class StaticPage {
         model.addAttribute("name", "李兆龙");
         return new ModelAndView("second", "second", model);
     }
+
     @GetMapping("/gatherTableInfo")
     public ModelAndView gatherTableInfo(Model model) {
         log.info("in gatherTableInfo");

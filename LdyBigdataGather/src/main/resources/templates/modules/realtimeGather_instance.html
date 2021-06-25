@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<template th:fragment="table">
+    <script type="text/javascript" src="/js/realtimeGather_instance.js"></script>
+    <div id="realtimeGather_instance" style="padding: 5px">
+        <table id="" class="easyui-datagrid" title="Basic DataGrid" style=""
+               data-options="singleSelect:true,collapsible:true,url:'get/mysqlDatabase',method:'get'">
+            <thead>
+            <tr>
+                <th data-options="field:'value',width:400">需要采集的mysqlDB</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+</template>

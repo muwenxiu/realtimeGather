@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<template th:fragment="nav">
+    <script type="text/javascript" src="/js/navigationBar.js"></script>
+    <div id="idCellInfoPanel" style="padding: 5px; width: 400px">
+    </div>
+    <ul id="idCellInfoTree">
+        <li>
+            <span>隆道云采集监控</span>
+            <ul>
+                <li>
+                    <span>实时采集</span>
+                    <ul>
+                        <li>
+                            <span>采集mysql数据库</span>
+                        </li>
+                        <li>
+                            <span>采集mysql实例</span>
+                        </li>
+                        <li>
+                            <span>采集的表</span>
+                        </li>
+                        <li>
+                            <span>采集通道</span>
+                        </li>
+                        <li>
+                            <span>采集进度</span>
+                        </li>
+                    </ul>
+
+                </li>
+                <li>
+                    <span>定时采集</span>
+                    <ul>
+                        <li>
+                            <span>采集的批次</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        <li>
+            <span>隆道云统计</span>
+            <ul>
+                <li>
+                    <span></span>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <span>供应商端匹配分析</span>
+            <ul>
+                <li>
+                    <span>分析进度</span>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</template>
