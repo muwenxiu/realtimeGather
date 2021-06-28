@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface MysqlTableColumn {
     List<MysqlColumnInfo> getMysqlColumnInfo(String databaseName, String tableNames);
-
-    boolean initMysqlColumn();
-}
+ }

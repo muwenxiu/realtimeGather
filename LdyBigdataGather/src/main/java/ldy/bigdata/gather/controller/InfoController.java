@@ -1,9 +1,7 @@
 package ldy.bigdata.gather.controller;
 
-import ldy.bigdata.gather.entities.CanalChannelStatus;
-import ldy.bigdata.gather.entities.CanalGatherProgress;
-import ldy.bigdata.gather.entities.MysqlColumnInfo;
-import ldy.bigdata.gather.entities.SingleData;
+import ldy.bigdata.gather.entities.*;
+import ldy.bigdata.gather.mapper.sqlite.OpsDao;
 import ldy.bigdata.gather.service.AsyncService;
 import ldy.bigdata.gather.service.InitConfig;
 import ldy.bigdata.gather.service.MysqlTableColumn;
@@ -45,16 +43,25 @@ public class InfoController {
     }
 
     @Autowired
-    private MysqlTableColumn mysqlTableColumn;
+    private OpsDao opsDao;
 
-    @RequestMapping("/mysqlColumn")
-    public List<MysqlColumnInfo> getMysqlTableColumn(
-            @RequestParam(value = "databaseName", required = true) String databaseName,
-            @RequestParam(value = "tableNames", required = true) String tableNames
-    ) {
-        List<MysqlColumnInfo> lst = mysqlTableColumn.getMysqlColumnInfo(databaseName, tableNames);
+
+    @RequestMapping("/gatherTables")
+    public List<KeyValue> gatherTables() {
+        List<KeyValue> lst = opsDao.gatherTables();
         return lst;
     }
+
+    @RequestMapping("/gatherTableColumns")
+    public List<MysqlColumnInfo> gatherTableColumns(
+            @RequestParam(value = "mysqlTableName", required = true) String mysqlTableName
+    ) {
+        //String tableName = "auction.auction_project";
+        String tableName = mysqlTableName;
+        List<MysqlColumnInfo> lst = opsDao.getMysqlColumnInfo(tableName);
+        return lst;
+    }
+
 
     @Autowired
     private AsyncService asyncService;

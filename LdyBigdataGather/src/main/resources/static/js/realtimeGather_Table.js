@@ -3,9 +3,9 @@ $(function () {
         iconCls: 'icon-search',
     });
     $('#cmbTableName').combobox({
-        url:'',
-        valueField:'id',
-        textField:'text'
+        valueField:'key',
+        textField:'value',
+        url:'get/gatherTables',
     });
     selectGatherTable();
 });
@@ -14,7 +14,10 @@ function selectGatherTable() {
     $('#mysqlTableInfo').datagrid({
         method: 'post',
         loadMsg: "正在加载数据。。。",
-        url:'',
+        url:'get/gatherTableColumns',
+        queryParams:{
+            mysqlTableName: $("#cmbTableName").combobox("getText"),
+        }
     });
 
 }

@@ -1,16 +1,17 @@
 <div th:fragment="table">
     <script type="text/javascript" src="/js/realtimeGather_Table.js"></script>
-    <select id="cmbTableName" class="easyui-combobox" name="dept" style="width:200px;">
-
+    <select id="cmbTableName" class="easyui-combobox" name="dept" style="width:400px;">
     </select>
     <a id="btnSearchTable" type="button"  class="easyui-linkbutton" onclick="selectGatherTable()">查询</a>
     <div id="realtimeGather_Table">
-
         <table id="mysqlTableInfo" class="easyui-datagrid" title="Basic DataGrid" style=""
                data-options="singleSelect:true,collapsible:true,url:'get/mysqlDatabase',method:'get'">
             <thead>
             <tr>
-                <th data-options="field:'value',width:400">表字段名称</th>
+                <th data-options="field:'mysqlTableName',width:400">表名称</th>
+                <th data-options="field:'columnName',width:400">字段名称</th>
+                <th data-options="field:'type',width:400">字段类型</th>
+                <th data-options="field:'position',width:400">字段顺序</th>
             </tr>
             </thead>
         </table>

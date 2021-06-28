@@ -90,9 +90,4 @@ public class MysqlTableColumnImpl implements MysqlTableColumn {
         return lst;
     }
 
-    @Override
-    public boolean initMysqlColumn() {
-        //TODO
-        return false;
-    }
 }

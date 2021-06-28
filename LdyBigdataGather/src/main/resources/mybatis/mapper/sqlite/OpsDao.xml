@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ldy.bigdata.gather.mapper.sqlite.OpsDao">
+
+    <select id="gatherTables" resultType="ldy.bigdata.gather.entities.KeyValue">
+        select mysqlDataBase||'.'||tableName as key, mysqlDataBase||'.'||tableName as value
+        from DataGatherConfigPE
+        where isRealTime = 1
+           or isValid = 1
+    </select>
+
+    <select id="getMysqlColumnInfo" resultType="ldy.bigdata.gather.entities.ColumnInfo">
+        select mysqlTableName,columnName,type,position from    mysqlColumnType
+        where mysqlTableName = #{mysqlTableName, jdbcType=VARCHAR}
+        order by mysqlTableName,position
+    </select>
+
+
+</mapper>
