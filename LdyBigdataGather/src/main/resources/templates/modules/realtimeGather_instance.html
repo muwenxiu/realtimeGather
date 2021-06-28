@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-</head>
-<template th:fragment="table">
+<div th:fragment="table">
     <script type="text/javascript" src="/js/realtimeGather_instance.js"></script>
-    <div id="realtimeGather_instance" style="padding: 5px">
-        <table id="" class="easyui-datagrid" title="Basic DataGrid" style=""
+    <input name="btnSearch" type="button" value='查询'
+           style="width: 55px;" class="button" onclick="selectInstance()"/>
+    <div style="padding: 5px">
+        <table id="mysqlDatabaseTable" class="easyui-datagrid" title="Basic DataGrid" style=""
                data-options="singleSelect:true,collapsible:true,url:'get/mysqlDatabase',method:'get'">
             <thead>
             <tr>
@@ -14,5 +12,4 @@
             </thead>
         </table>
     </div>
-
-</template>
+</div>

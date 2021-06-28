@@ -1,11 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-</head>
-<template th:fragment="table">
+<div th:fragment="table">
     <script type="text/javascript" src="/js/realtimeGather_Table.js"></script>
-    <div id="realtimeGather_Table"  >
-        realtimeGather_Table.html
-    </div>
+    <select id="cmbTableName" class="easyui-combobox" name="dept" style="width:200px;">
 
-</template>
+    </select>
+    <a id="btnSearchTable" type="button"  class="easyui-linkbutton" onclick="selectGatherTable()">查询</a>
+    <div id="realtimeGather_Table">
+
+        <table id="mysqlTableInfo" class="easyui-datagrid" title="Basic DataGrid" style=""
+               data-options="singleSelect:true,collapsible:true,url:'get/mysqlDatabase',method:'get'">
+            <thead>
+            <tr>
+                <th data-options="field:'value',width:400">表字段名称</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,20 @@
+<div th:fragment="table">
+    <script type="text/javascript" src="/js/realtimeGather_canalChannelProgress.js"></script>
+    <a id="idGetCanalProgress" onclick="getCanalProgress()" href="#" class="easyui-linkbutton"
+       data-options="iconCls:'icon-search'"
+       style="width:160px">canal采集进度</a>
+    <div>
+        <table id="realtimeGather_canalChannelProgress" class="easyui-datagrid" title="Basic DataGrid"
+               data-options="singleSelect:true,collapsible:true,method:'get'">
+            <thead>
+            <tr>
+                <th data-options="field:'canalName',width:300">CanalChannel名称</th>
+                <th data-options="field:'gatherLogName',width:300">采集日志文件名称</th>
+                <th data-options="field:'gatherPosition',width:300">采集日志文件位置</th>
+                <th data-options="field:'binlogPosition',width:300">当前binlog文件大小</th>
+                <th data-options="field:'binlogName',width:400">当前binlog文件名称</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>

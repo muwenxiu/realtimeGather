@@ -20,6 +20,13 @@ public class StaticPage {
         return "index";
     }
 
+    @RequestMapping("/test1")
+    public String  test1() {
+        log.info("a");
+        return  "modules/realtimeGather_Table :: table" ;
+    }
+
+
     @GetMapping("/second")
     public ModelAndView second(Model model) {
         log.info("in second");

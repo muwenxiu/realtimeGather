@@ -1,0 +1,17 @@
+<div th:fragment="table">
+    <script type="text/javascript" src="/js/realtimeGather_canalChannelStatus.js"></script>
+    <a id="idGatherCanalChannelStatus" onclick="gatherCanalChannelStatus()" href="#" class="easyui-linkbutton"
+       data-options="iconCls:'icon-search'"
+       style="width:160px">canal状态</a>
+    <div>
+        <table id="gatherStatusTable" class="easyui-datagrid" title="Basic DataGrid" style="width:1400px"
+               data-options="singleSelect:true,collapsible:true,method:'get'">
+            <thead>
+            <tr>
+                <th data-options="field:'canalChannelName',width:400">采集的CanalChannel名称</th>
+                <th data-options="field:'canalChannelStatus',width:400">采集的CanalChannel状态</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
