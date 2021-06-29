@@ -46,8 +46,6 @@ $(function () {
                 })
             } else if (node.text == "分析进度") {
                 alert("分析进度");
-            } else {
-                alert("ss");
             }
         }
     });
