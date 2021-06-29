@@ -21,6 +21,7 @@ $(function () {
     setonTimeGatherInfo(1234);
 
     setResize();
+
     window.onresize = function () {
         setResize();
     }
@@ -29,6 +30,8 @@ $(function () {
 function setonTimeBatchInfo(batchId) {
     $("#onTimeBatchInfo").datagrid({
         method: 'post',
+        showHeader: true,
+        noheader: true,
         loadMsg: "正在加载数据。。。",
         url: 'get/getDataGatherBatchInfo',
         queryParams: {
@@ -40,6 +43,8 @@ function setonTimeBatchInfo(batchId) {
 function setonTimeGatherInfo(batchId) {
     $("#onTimeGatherInfo").datagrid({
         method: 'post',
+        showHeader: true,
+        noheader: true,
         loadMsg: "正在加载数据。。。",
         url: 'get/getDataGatherInfo',
         queryParams: {
