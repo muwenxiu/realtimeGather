@@ -14,7 +14,7 @@ import java.util.List;
 public interface OpsDao {
     List<KeyValue> gatherTables();
 
-    List<KeyValue> gatherBatch();
+    List<KeyValue> gatherBatch(String status);
 
     List<BatchInfo> gatherBatchInfo(long batch);
 

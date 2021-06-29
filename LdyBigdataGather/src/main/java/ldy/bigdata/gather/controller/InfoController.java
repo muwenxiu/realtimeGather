@@ -63,8 +63,10 @@ public class InfoController {
     }
 
     @RequestMapping("/getGatherBatch")
-    public List<KeyValue> getGatherBatch() {
-        List<KeyValue> lst = opsDao.gatherBatch();
+    public List<KeyValue> getGatherBatch(
+            @RequestParam(value = "status", required = true) String status
+    ) {
+        List<KeyValue> lst = opsDao.gatherBatch(status);
         return lst;
     }
 

@@ -3,9 +3,16 @@ $(function () {
             fit: true,
         }
     );
+    $("#cmbBatchType").combobox({});
+    $("#btnSearchBatch").linkbutton({
+        iconCls: 'icon-search',
+    });
 
     $("#onTimeGatherBatch").datalist({
         url: 'get/getGatherBatch',
+        queryParams: {
+            status: '',
+        },
         checkbox: false,
         lines: true,
         valueField: 'key',
@@ -17,7 +24,7 @@ $(function () {
             setonTimeGatherInfo(batchId);
         }
     });
-    setonTimeBatchInfo(20210628114);
+    setonTimeBatchInfo(1234);
     setonTimeGatherInfo(1234);
 
     setResize();
@@ -26,6 +33,16 @@ $(function () {
         setResize();
     }
 });
+
+function selectBatch() {
+    var status = $("#cmbBatchType").combobox("getValue")
+    $("#onTimeGatherBatch").datalist({
+        url: 'get/getGatherBatch',
+        queryParams: {
+            status: status,
+        }
+    });
+}
 
 function setonTimeBatchInfo(batchId) {
     $("#onTimeBatchInfo").datagrid({

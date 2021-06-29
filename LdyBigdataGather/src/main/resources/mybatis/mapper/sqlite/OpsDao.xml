@@ -19,9 +19,15 @@
     </select>
 
     <select id="gatherBatch" resultType="ldy.bigdata.gather.entities.KeyValue">
-        select gatherBatchID as key,
-            gatherBatchID as value
+        select
+        gatherBatchID as key,
+        gatherBatchID as value
         from DataGatherBatch
+        <where>
+            <if test="status != null and status != ''">
+                and gatherStatus = #{status, jdbcType=VARCHAR} or analyseStatus = #{status, jdbcType=VARCHAR}
+            </if>
+        </where>
         order by gatherBatchID
     </select>
 
@@ -39,7 +45,7 @@
     </select>
 
     <select id="gatherInfo" resultType="ldy.bigdata.gather.entities.GatherInfo">
-        select task_id taskId,
+        select task_id     taskId,
                startGather,
                endGather,
                batchId,
