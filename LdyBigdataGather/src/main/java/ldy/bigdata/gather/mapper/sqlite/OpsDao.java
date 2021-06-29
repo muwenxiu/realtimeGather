@@ -1,9 +1,6 @@
 package ldy.bigdata.gather.mapper.sqlite;
 
-import ldy.bigdata.gather.entities.BatchInfo;
-import ldy.bigdata.gather.entities.GatherInfo;
-import ldy.bigdata.gather.entities.KeyValue;
-import ldy.bigdata.gather.entities.MysqlColumnInfo;
+import ldy.bigdata.gather.entities.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -19,6 +16,10 @@ public interface OpsDao {
     List<BatchInfo> gatherBatchInfo(long batch);
 
     List<GatherInfo> gatherInfo(long batch);
+
+    List<KeyValue> getAnalyseBatch(String status);
+
+    List<AnalyseTaskInfo> getAnalyseTaskInfo(String batchId);
 
     List<MysqlColumnInfo> getMysqlColumnInfo(String mysqlTableName);
 

@@ -45,7 +45,13 @@ $(function () {
                     },
                 })
             } else if (node.text == "分析进度") {
-                alert("分析进度");
+                $.ajax({
+                    url: '/analyseTemplate',
+                    type: 'POST',
+                    success: function (data) {
+                        $("#center").html(data);
+                    },
+                })
             }
         }
     });

@@ -38,8 +38,12 @@ public class ModuleController {
     }
 
     @RequestMapping("/onTimeGatherBatch")
-    public String onTimeGatherBatch(){
-        log.info("onTimeGatherBatch");
+    public String onTimeGatherBatch() {
         return "modules/onTimeGather :: table";
+    }
+
+    @RequestMapping("/analyseTemplate")
+    public String analyseTemplate() {
+        return "modules/analyse :: table";
     }
 }

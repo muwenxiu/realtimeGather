@@ -61,4 +61,38 @@
         order by task_id
     </select>
 
+    <select id="getAnalyseBatch" resultType="ldy.bigdata.gather.entities.KeyValue">
+        select
+        distinct
+        BatchId as key,
+        BatchId as value
+        from AnalyseTask
+        <where>
+            <if test="status != null and status != ''">
+                and taskStatus = #{status, jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by BatchId
+    </select>
+
+    <select id="getAnalyseTaskInfo" resultType="ldy.bigdata.gather.entities.AnalyseTaskInfo">
+        select
+        taskId,
+        batchId,
+        taskName,
+        taskStatus,
+        scriptStartTime,
+        scriptEndTime,
+        runStart,
+        runEnd,
+        gatherBatchId,
+        retryCnt
+        from AnalyseTask
+        <where>
+            <if test="status != null and status != ''">
+                and BatchId = #{status, jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by taskId
+    </select>
 </mapper>

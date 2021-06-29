@@ -87,6 +87,23 @@ public class InfoController {
     }
 
 
+    @RequestMapping("/getAnalyseBatch")
+    public List<KeyValue> getAnalyseBatch(
+            @RequestParam(value = "status", required = true) String status
+    ) {
+        List<KeyValue> lst = opsDao.getAnalyseBatch(status);
+        return lst;
+    }
+
+
+    @RequestMapping("/getAnalyseTaskInfo")
+    public List<AnalyseTaskInfo> getAnalyseTaskInfo(
+            @RequestParam(value = "batchId", required = true) String batchId
+    ) {
+        List<AnalyseTaskInfo> lst = opsDao.getAnalyseTaskInfo(batchId);
+        return lst;
+    }
+
     @Autowired
     private AsyncService asyncService;
 
