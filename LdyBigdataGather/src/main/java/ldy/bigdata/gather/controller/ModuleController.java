@@ -19,25 +19,27 @@ public class ModuleController {
 
     @RequestMapping("/realtimeGather_instance")
     public String realtimeGather_instance(Model model) {
-        log.info("realtimeGather_instance");
         return "modules/realtimeGather_instance :: table";
     }
 
     @RequestMapping("/realtimeGather_Table")
     public String realtimeGather_Table() {
-        log.info("realtimeGather_Table");
         return "modules/realtimeGather_Table :: table";
     }
 
     @RequestMapping("/realtimeGather_canalChannel")
     public String realtimeGather_canalChannel() {
-        log.info("realtimeGather_canalChannel");
         return "modules/realtimeGather_canalChannelStatus :: table";
     }
 
     @RequestMapping("/realtimeGather_canalChannelProgress")
     public String realtimeGather_canalChannelProgress() {
-        log.info("realtimeGather_canalChannelProgress");
         return "modules/realtimeGather_canalChannelProgress :: table";
+    }
+
+    @RequestMapping("/onTimeGatherBatch")
+    public String onTimeGatherBatch(){
+        log.info("onTimeGatherBatch");
+        return "modules/onTimeGather :: table";
     }
 }

@@ -61,6 +61,25 @@ public class InfoController {
         List<MysqlColumnInfo> lst = opsDao.getMysqlColumnInfo(tableName);
         return lst;
     }
+    @RequestMapping("/getGatherBatch")
+    public List<KeyValue> getGatherBatch() {
+        List<KeyValue> lst = opsDao.gatherBatch();
+        return lst;
+    }
+
+    @RequestMapping("/getDataGatherBatchInfo")
+    public List<BatchInfo> getDataGatherBatch(@RequestParam(value = "batch",required = true)int batch) {
+        int batchID = batch;
+        List<BatchInfo> lst = opsDao.gatherBatchInfo(batchID);
+        return lst;
+    }
+
+    @RequestMapping("/getDataGatherInfo")
+    public List<GatherInfo> getDataGatherInfo(@RequestParam(value = "batch",required = true)int batch) {
+        int batchID = batch;
+        List<GatherInfo> lst = opsDao.gatherInfo(batchID);
+        return lst;
+    }
 
 
     @Autowired

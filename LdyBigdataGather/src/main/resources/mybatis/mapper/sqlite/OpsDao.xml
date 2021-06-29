@@ -5,17 +5,54 @@
 <mapper namespace="ldy.bigdata.gather.mapper.sqlite.OpsDao">
 
     <select id="gatherTables" resultType="ldy.bigdata.gather.entities.KeyValue">
-        select mysqlDataBase||'.'||tableName as key, mysqlDataBase||'.'||tableName as value
+        select mysqlDataBase || '.' || tableName as key, mysqlDataBase||'.'||tableName as value
         from DataGatherConfigPE
         where isRealTime = 1
            or isValid = 1
     </select>
 
     <select id="getMysqlColumnInfo" resultType="ldy.bigdata.gather.entities.ColumnInfo">
-        select mysqlTableName,columnName,type,position from    mysqlColumnType
+        select mysqlTableName, columnName, type, position
+        from mysqlColumnType
         where mysqlTableName = #{mysqlTableName, jdbcType=VARCHAR}
-        order by mysqlTableName,position
+        order by mysqlTableName, position
     </select>
 
+    <select id="gatherBatch" resultType="ldy.bigdata.gather.entities.KeyValue">
+        select gatherBatchID as key,
+            gatherBatchID as value
+        from DataGatherBatch
+        order by gatherBatchID
+    </select>
+
+    <select id="gatherBatchInfo" resultType="ldy.bigdata.gather.entities.BatchInfo">
+        select gatherBatchID,
+               gatherStatus,
+               analyseStatus,
+               impalaToMysqlStaus       impalaToMysqlStatus,
+               analyseStatusUpdate_Time analyseStatusUpdateTime,
+               create_time              createTime,
+               update_time              updateTime
+        from DataGatherBatch
+        where gatherBatchID = #{batch, jdbcType=INTEGER}
+        order by gatherBatchID
+    </select>
+
+    <select id="gatherInfo" resultType="ldy.bigdata.gather.entities.GatherInfo">
+        select task_id taskId,
+               startGather,
+               endGather,
+               batchId,
+               taskStatus,
+               runStart,
+               runEnd,
+               update_time updateTime,
+               description,
+               selectCnt,
+               insertCnt
+        from DataGatherTask
+        where batchId = #{batch, jdbcType=INTEGER}
+        order by task_id
+    </select>
 
 </mapper>

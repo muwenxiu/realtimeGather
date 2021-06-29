@@ -1,5 +1,7 @@
 package ldy.bigdata.gather.mapper.sqlite;
 
+import ldy.bigdata.gather.entities.BatchInfo;
+import ldy.bigdata.gather.entities.GatherInfo;
 import ldy.bigdata.gather.entities.KeyValue;
 import ldy.bigdata.gather.entities.MysqlColumnInfo;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,6 +13,12 @@ import java.util.List;
 @Mapper
 public interface OpsDao {
     List<KeyValue> gatherTables();
+
+    List<KeyValue> gatherBatch();
+
+    List<BatchInfo> gatherBatchInfo(int batch);
+
+    List<GatherInfo> gatherInfo(int batch);
 
     List<MysqlColumnInfo> getMysqlColumnInfo(String mysqlTableName);
 
