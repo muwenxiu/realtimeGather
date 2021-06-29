@@ -16,9 +16,9 @@ public interface OpsDao {
 
     List<KeyValue> gatherBatch();
 
-    List<BatchInfo> gatherBatchInfo(int batch);
+    List<BatchInfo> gatherBatchInfo(long batch);
 
-    List<GatherInfo> gatherInfo(int batch);
+    List<GatherInfo> gatherInfo(long batch);
 
     List<MysqlColumnInfo> getMysqlColumnInfo(String mysqlTableName);
 

@@ -34,7 +34,7 @@
                create_time              createTime,
                update_time              updateTime
         from DataGatherBatch
-        where gatherBatchID = #{batch, jdbcType=INTEGER}
+        where gatherBatchID = #{batch, jdbcType=BIGINT}
         order by gatherBatchID
     </select>
 
@@ -51,7 +51,7 @@
                selectCnt,
                insertCnt
         from DataGatherTask
-        where batchId = #{batch, jdbcType=INTEGER}
+        where batchId = #{batch, jdbcType=BIGINT}
         order by task_id
     </select>
 

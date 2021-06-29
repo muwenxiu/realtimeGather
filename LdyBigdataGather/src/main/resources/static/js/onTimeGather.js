@@ -11,11 +11,10 @@ $(function () {
         valueField: 'key',
         textField: 'value',
         onSelect: function (rowIndex, rowData) {
-            //  alert(rowData.value);
             var batchId = rowData.value;
             console.log(batchId)
             setonTimeBatchInfo(batchId);
-            // setonTimeGatherInfo(batchId);
+            setonTimeGatherInfo(batchId);
         }
     });
     setonTimeBatchInfo(20210628114);
@@ -28,27 +27,25 @@ $(function () {
 });
 
 function setonTimeBatchInfo(batchId) {
-    $("#onTimeBatchInfo").datagrid(
-        {
-            method: 'post',
-            loadMsg: "正在加载数据。。。",
-            url: 'get/getDataGatherBatchInfo',
-            queryParams: {
-                batch: batchId,
-            },
-        });
+    $("#onTimeBatchInfo").datagrid({
+        method: 'post',
+        loadMsg: "正在加载数据。。。",
+        url: 'get/getDataGatherBatchInfo',
+        queryParams: {
+            batch: batchId,
+        }
+    });
 }
 
 function setonTimeGatherInfo(batchId) {
-    $("#onTimeGatherInfo").datagrid(
-        {
-            method: 'post',
-            loadMsg: "正在加载数据。。。",
-            url: 'get/getDataGatherInfo',
-            queryParams: {
-                batch: batchId,
-            },
-        });
+    $("#onTimeGatherInfo").datagrid({
+        method: 'post',
+        loadMsg: "正在加载数据。。。",
+        url: 'get/getDataGatherInfo',
+        queryParams: {
+            batch: batchId,
+        },
+    });
 }
 
 function setResize() {
