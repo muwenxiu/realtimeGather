@@ -20,7 +20,7 @@ public class JobSchedule {
     private ApplicationContext applicationContext;
 
     //canal连接检测
-    //@Scheduled(cron = "0/10 * * * * ?")
+    @Scheduled(cron = "0/10 * * * * ?")
     public void canalHeartbeatMonitor() {
         ThreadPoolTaskExecutor executor = (ThreadPoolTaskExecutor) applicationContext.getBean("asyncServiceExecutor");
         log.info("TaskCount:{},CompletedTaskCount:{} ,ActiveCount:{},QueueSize:{}",
