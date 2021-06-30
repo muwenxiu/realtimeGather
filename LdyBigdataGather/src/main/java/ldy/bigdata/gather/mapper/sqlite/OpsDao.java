@@ -21,7 +21,11 @@ public interface OpsDao {
 
     List<GatherInfo> gatherInfo(long batch);
 
+    String getAnalyseBatchTime(String batch);
+
     List<KeyValue> getAnalyseBatch(String status);
+
+    boolean delAnalyseTask(String time);
 
     List<AnalyseTaskInfo> getAnalyseTaskInfo(String batchId);
 

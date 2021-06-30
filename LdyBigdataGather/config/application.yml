@@ -26,7 +26,7 @@ spring:
       jdbc-url: jdbc:impala://172.16.1.92:21050/
     sqlite:
       driver-class-name: org.sqlite.JDBC
-      jdbc-url: jdbc:sqlite:config/DataAnalyseTask.db
+      jdbc-url: jdbc:sqlite:/home/ldydb/workcode/Config/DataAnalyseTask.db
     purchase:
       driver-class-name: org.mariadb.jdbc.Driver
       jdbc-url: jdbc:mariadb://slave-bigdata-mariadb.internal.cg-xt.com:3306/purchase

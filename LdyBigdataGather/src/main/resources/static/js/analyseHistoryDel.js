@@ -1,14 +1,14 @@
 $(function () {
-    $('#analyseLayout').layout({
+    $('#delAnalyseLayout').layout({
             fit: true,
         }
     );
-    $("#analyseBatchType").combobox({});
-    $("#btnSelectAnalyseBatch").linkbutton({
+    $("#delAnalyseBatchType").combobox({});
+    $("#btnSelectAnalyseBatchDel").linkbutton({
         iconCls: 'icon-search',
     });
 
-    $("#analyseBatch").datalist({
+    $("#analyseBatchDel").datalist({
         url: 'get/getAnalyseBatch',
         queryParams: {
             status: '',
@@ -19,22 +19,33 @@ $(function () {
         textField: 'value',
         onSelect: function (rowIndex, rowData) {
             var batchId = rowData.value;
-            console.log(batchId)
-            analyseInfo(batchId);
+            console.log("分析批次:" + batchId)
+            $.ajax({
+                url: 'get/getAnalyseBatchTime',
+                data: {batchID: batchId,},
+                success: function (r) {
+                    $("#analyseTime").textbox("setValue", r);
+                }
+            })
+
         }
     });
-
-    analyseInfo(1234);
-    setAnalyseResize();
+    $("#analyseTime").textbox({
+        //iconCls: 'icon-cancel',
+    });
+    $("#btnAnalyseBatchDel").linkbutton({
+        iconCls: 'icon-cancel',
+    });
+    delSetAnalyseResize();
 
     window.onresize = function () {
-        setAnalyseResize();
+        delSetAnalyseResize();
     }
 });
 
-function selectAnalyseBatch() {
-    var status = $("#analyseBatchType").combobox("getValue")
-    $("#analyseBatch").datalist({
+function selectAnalyseBatchDel() {
+    var status = $("#delAnalyseBatchType").combobox("getValue")
+    $("#analyseBatchDel").datalist({
         url: 'get/getAnalyseBatch',
         queryParams: {
             status: status,
@@ -42,31 +53,27 @@ function selectAnalyseBatch() {
     });
 }
 
-function analyseInfo(batchId) {
-    $("#analyseInfoTable").datagrid({
-        method: 'post',
-        showHeader: true,
-        noheader: true,
-        loadMsg: "正在加载数据。。。",
-        url: 'get/getAnalyseTaskInfo',
-        queryParams: {
-            batchId: batchId,
-        },
+function analyseBatchDel() {
+    var time = $("#analyseTime").textbox('getValue');
+    console.log("删除：" + time)
+    $.ajax({
+        type: 'POST',
+        url: 'get/delAnalyseTask',
+        data: {time: time},
     });
+    selectAnalyseBatchDel();
 }
 
-function setAnalyseResize() {
+function delSetAnalyseResize() {
     var windowCenterHeight = $("#layoutCenter").innerHeight();
     var windowCenterWidth = $("#layoutCenter").width();
     console.log("analyse.html Width=" + windowCenterWidth + ",Height=" + windowCenterHeight);
-    $("#analyseLayout").height(windowCenterHeight);
-    $("#analyseLayout").width(windowCenterWidth);
+    $("#delAnalyseLayout").height(windowCenterHeight);
+    $("#delAnalyseLayout").width(windowCenterWidth);
 
-    $("#analyseLayoutWest").height(windowCenterHeight - 2);
-    $("#analyseLayoutCenter").height(windowCenterHeight - 2);
-    var analyseLayoutWestWidth=$("#analyseLayoutWest").width();
-    $("#analyseLayoutCenter").width(windowCenterWidth - analyseLayoutWestWidth);
-    $("#analyseInfoTable").datagrid("resize", {
-        width: windowCenterWidth - analyseLayoutWestWidth - 20,
-    });
+    $("#delAnalyseLayoutWest").height(windowCenterHeight - 2);
+    $("#delAnalyseLayoutCenter").height(windowCenterHeight - 2);
+    var analyseLayoutWestWidth = $("#analyseLayoutWest").width();
+    $("#delAnalyseLayoutCenter").width(windowCenterWidth - analyseLayoutWestWidth);
+
 }

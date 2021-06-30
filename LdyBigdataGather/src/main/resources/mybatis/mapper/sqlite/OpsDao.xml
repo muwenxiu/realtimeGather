@@ -106,4 +106,12 @@
         from DataGatherBatch
         where gatherBatchID &lt; #{batch, jdbcType=BIGINT}
     </delete>
+    <select id="getAnalyseBatchTime" resultType="java.lang.String">
+        select max(runStart) runStart
+        from AnalyseTask
+        where BatchId = #{batch, jdbcType=VARCHAR}
+    </select>
+    <delete id="delAnalyseTask">
+        delete from AnalyseTask where runstart &lt; #{time, jdbcType=VARCHAR}
+    </delete>
 </mapper>

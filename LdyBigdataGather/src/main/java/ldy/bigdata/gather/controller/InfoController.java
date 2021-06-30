@@ -103,6 +103,21 @@ public class InfoController {
         return lst;
     }
 
+    @RequestMapping("/delAnalyseTask")
+    public boolean delAnalyseTask(
+            @RequestParam(value = "time", required = true) String time
+    ) {
+        boolean lst = opsDao.delAnalyseTask(time);
+        return lst;
+    }
+
+    @RequestMapping("/getAnalyseBatchTime")
+    public String getAnalyseBatchTime(
+            @RequestParam(value = "batchID", required = true) String batchId
+    ) {
+        String lst = opsDao.getAnalyseBatchTime(batchId);
+        return lst;
+    }
 
     @RequestMapping("/getAnalyseTaskInfo")
     public List<AnalyseTaskInfo> getAnalyseTaskInfo(
