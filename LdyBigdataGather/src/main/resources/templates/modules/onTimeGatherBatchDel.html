@@ -1,0 +1,21 @@
+<div th:fragment="table">
+    <script type="text/javascript" src="/js/onTimeGatherBatchDel.js"></script>
+    <div id="delOnTimeGatherLayout" class="easyui-layout">
+        <div id="delOnTimeLayoutWest" data-options="region:'west',split : true," style="width:200px;">
+            <select id="cmbBatchType" class="easyui-combobox" name="dept" style="width:100px;">
+                <option value=""></option>
+                <option value="RUNNING">RUNNING</option>
+                <option value="OK">OK</option>
+                <option value="ERROR">ERROR</option>
+            </select>
+            <a id="btnSearchBatch" type="button"  class="easyui-linkbutton" onclick="del_SelectBatch()">查询</a>
+            <ul id="onTimeGatherBatch"  class="easyui-datalist"></ul>
+        </div>
+        <div id="delOnTimeLayoutCenter" data-options="region:'center'" style="padding:1px;background:#eee;">
+            <p>删除小于该批次的所有采集批次</p>
+            <input id="batchId" type="text">
+            <a id="btnDelBatch" type="button"  class="easyui-linkbutton" onclick="delBatch()">删除</a>
+
+        </div>
+    </div>
+</div>

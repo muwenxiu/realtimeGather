@@ -1,0 +1,34 @@
+<div th:fragment="table">
+    <script type="text/javascript" src="/js/analyseHistoryDel.js"></script>
+    <div id="analyseLayout" class="easyui-layout">
+        <div id="analyseLayoutWest" data-options="region:'west',split : true," style="width:250px;">
+            <select id="analyseBatchType" class="easyui-combobox" name="dept" style="width:100px;">
+                <option value=""></option>
+                <option value="RUNNING">RUNNING</option>
+                <option value="OK">OK</option>
+                <option value="ERROR">ERROR</option>
+            </select>
+            <a id="btnSelectAnalyseBatch" type="button" class="easyui-linkbutton" onclick="selectAnalyseBatch()">分析查询</a>
+            <ul id="analyseBatch" class="easyui-datalist"></ul>
+        </div>
+        <div id="analyseLayoutCenter" data-options="region:'center'" style="padding:1px;background:#eee;">
+            <table id="analyseInfoTable" class="easyui-datagrid" title="Basic DataGrid" style=""
+                   data-options="singleSelect:true,collapsible:true,url:'get/mysqlDatabase',method:'get'">
+                <thead>
+                <tr>
+                    <th data-options="field:'taskId',width:100">taskId</th>
+                    <th data-options="field:'batchId',width:150">BatchId</th>
+                    <th data-options="field:'taskName',width:150">taskName</th>
+                    <th data-options="field:'taskStatus',width:100">状态</th>
+                    <th data-options="field:'scriptStartTime',width:150">scriptStartTime</th>
+                    <th data-options="field:'scriptEndTime',width:150">scriptEndTime</th>
+                    <th data-options="field:'runStart',width:150">runEnd</th>
+                    <th data-options="field:'runEnd',width:150">runEnd</th>
+                    <th data-options="field:'gatherBatchId',width:100">gatherBatchId</th>
+                    <th data-options="field:'retryCnt',width:100">retryCnt</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>

@@ -56,7 +56,6 @@ public class InfoController {
     public List<MysqlColumnInfo> gatherTableColumns(
             @RequestParam(value = "mysqlTableName", required = true) String mysqlTableName
     ) {
-        //String tableName = "auction.auction_project";
         String tableName = mysqlTableName;
         List<MysqlColumnInfo> lst = opsDao.getMysqlColumnInfo(tableName);
         return lst;
@@ -67,6 +66,15 @@ public class InfoController {
             @RequestParam(value = "status", required = true) String status
     ) {
         List<KeyValue> lst = opsDao.gatherBatch(status);
+        return lst;
+    }
+
+    @RequestMapping("/delGatherBatch")
+    public boolean delGatherBatch(
+            @RequestParam(value = "batchId", required = true) long batchId
+    ) {
+        boolean lst = opsDao.delGatherBatch(batchId);
+        lst = opsDao.delHistoryGatherTask(batchId);
         return lst;
     }
 

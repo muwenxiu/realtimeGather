@@ -95,4 +95,15 @@
         </where>
         order by taskId
     </select>
+
+    <delete id="delHistoryGatherTask">
+        delete
+        from DataGatherTask
+        where batchId &lt; #{batch, jdbcType=BIGINT}
+    </delete>
+    <delete id="delGatherBatch">
+        delete
+        from DataGatherBatch
+        where gatherBatchID &lt; #{batch, jdbcType=BIGINT}
+    </delete>
 </mapper>

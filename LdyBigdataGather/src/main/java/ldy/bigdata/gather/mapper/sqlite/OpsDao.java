@@ -13,6 +13,10 @@ public interface OpsDao {
 
     List<KeyValue> gatherBatch(String status);
 
+    boolean delGatherBatch(long batch);
+
+    boolean delHistoryGatherTask(long batch);
+
     List<BatchInfo> gatherBatchInfo(long batch);
 
     List<GatherInfo> gatherInfo(long batch);

@@ -44,9 +44,27 @@ $(function () {
                         $("#center").html(data);
                     },
                 })
-            } else if (node.text == "分析进度") {
+            } else if (node.text == "采集批次删除") {
+                $.ajax({
+                    url: '/onTimeGatherBatchDel',
+                    type: 'POST',
+                    success: function (data) {
+                        $("#center").html(data);
+                    },
+                })
+            }
+            else if (node.text == "分析进度") {
                 $.ajax({
                     url: '/analyseTemplate',
+                    type: 'POST',
+                    success: function (data) {
+                        $("#center").html(data);
+                    },
+                })
+            }
+            else if (node.text == "分析历史进度删除") {
+                $.ajax({
+                    url: '/analyseHistoryDel',
                     type: 'POST',
                     success: function (data) {
                         $("#center").html(data);

@@ -42,8 +42,17 @@ public class ModuleController {
         return "modules/onTimeGather :: table";
     }
 
+    @RequestMapping("/onTimeGatherBatchDel")
+    public String onTimeGatherBatchDel() {
+        return "modules/onTimeGatherBatchDel :: table";
+    }
     @RequestMapping("/analyseTemplate")
     public String analyseTemplate() {
         return "modules/analyse :: table";
+    }
+
+    @RequestMapping("/analyseHistoryDel")
+    public String analyseHistoryDel() {
+        return "modules/analyseHistoryDel :: table";
     }
 }
