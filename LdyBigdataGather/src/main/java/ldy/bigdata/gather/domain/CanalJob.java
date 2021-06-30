@@ -95,7 +95,7 @@ public class CanalJob {
                 canalClient.getConnect().rollback();
             }
         } catch (Exception e) {
-            log.error("canal连接" + canalClient.name() + "估计挂了", e);
+            log.error("canal连接 " + canalClient.name() + " 估计挂了", e);
             try {
                 Thread.sleep(10 * 1000);
             } catch (Exception ee) {

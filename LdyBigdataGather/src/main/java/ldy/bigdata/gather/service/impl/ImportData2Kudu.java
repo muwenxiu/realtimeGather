@@ -277,7 +277,7 @@ public class ImportData2Kudu implements IImportData {
             }
             if (ids.size() > 0) {
                 collectDataDealItem.insertDealItemPurchase(ids);
-                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。", "project_deal_item-purchase", ids.size()));
+                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。[%s]", "project_deal_item-purchase", ids.size(), ids));
                 //向sqlite中记录采集日志信息
                 gatherDao.updateRealtimeGather("project_deal_item-purchase", ids.size());
             }
@@ -292,7 +292,7 @@ public class ImportData2Kudu implements IImportData {
             }
             if (ids.size() > 0) {
                 collectDataDealItem.insertDealItemPurchase(ids);
-                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。", "project_deal_item-tender", ids.size()));
+                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。[%s]", "project_deal_item-tender", ids.size(), ids));
                 //向sqlite中记录采集日志信息
                 gatherDao.updateRealtimeGather("project_deal_item-tender", ids.size());
             }
@@ -307,7 +307,7 @@ public class ImportData2Kudu implements IImportData {
             }
             if (ids.size() > 0) {
                 collectDataDealItem.insertDealItemPurchase(ids);
-                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。", "project_deal_item-auction", ids.size()));
+                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。[%s]", "project_deal_item-auction", ids.size(), ids));
                 //向sqlite中记录采集日志信息
                 gatherDao.updateRealtimeGather("project_deal_item-auction", ids.size());
             }
@@ -322,7 +322,7 @@ public class ImportData2Kudu implements IImportData {
             }
             if (ids.size() > 0) {
                 collectDataDealItem.insertDealItemPurchase(ids);
-                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。", "project_deal_item-order", ids.size()));
+                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。[%s]", "project_deal_item-order", ids.size(), ids));
                 //向sqlite中记录采集日志信息
                 gatherDao.updateRealtimeGather("project_deal_item-order", ids.size());
             }
@@ -337,7 +337,7 @@ public class ImportData2Kudu implements IImportData {
             }
             if (ids.size() > 0) {
                 collectDataDealItem.insertDealItemPurchase(ids);
-                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。", "project_deal_item-contract", ids.size()));
+                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。[%s]", "project_deal_item-contract", ids.size(), ids));
                 //向sqlite中记录采集日志信息
                 gatherDao.updateRealtimeGather("project_deal_item-contract", ids.size());
             }
@@ -357,7 +357,7 @@ public class ImportData2Kudu implements IImportData {
             }
             if (ids.size() > 0) {
                 collectDataQuoteItem.insertQuoteItemPurchase(ids);
-                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。", "project_quote_item-purchase", ids.size()));
+                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。[%s]", "project_quote_item-purchase", ids.size(), ids));
                 //向sqlite中记录采集日志信息
                 gatherDao.updateRealtimeGather("project_quote_item-purchase", ids.size());
             }
@@ -372,7 +372,7 @@ public class ImportData2Kudu implements IImportData {
             }
             if (ids.size() > 0) {
                 collectDataQuoteItem.insertQuoteItemTender(ids);
-                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。", "project_quote_item-tender", ids.size()));
+                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。[%s]", "project_quote_item-tender", ids.size(), ids));
                 //向sqlite中记录采集日志信息
                 gatherDao.updateRealtimeGather("project_quote_item-tender", ids.size());
             }
@@ -388,7 +388,7 @@ public class ImportData2Kudu implements IImportData {
             if (ids.size() > 0) {
                 collectDataQuoteItem.insertQuoteItemAuction1(ids);
                 collectDataQuoteItem.insertQuoteItemAuction2(ids);
-                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。", "project_quote_item-auction", ids.size()));
+                log.info(String.format("sql 执行成功。 表： %s,更新 %s 条。[%s]", "project_quote_item-auction", ids.size(), ids));
                 //向sqlite中记录采集日志信息
                 gatherDao.updateRealtimeGather("project_quote_item-auction", ids.size());
                 gatherDao.updateRealtimeGather("project_quote_item-auction1", ids.size());
