@@ -18,11 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import com.alibaba.otter.canal.protocol.CanalEntry.Column;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
 
 @Service("ImportData2Kudu")
 //@Log4j2
@@ -49,15 +51,34 @@ public class ImportData2Kudu implements IImportData {
     @Override
     public boolean insert(String mysqlTableName, List<CanalEntry.RowData> lstRowData) {
         UpdateData("插入", mysqlTableName, lstRowData);
-        if (mysqlTableName.equals("purchase.purchase_project_item")) {
-            Dwd_ItemCollect(mysqlTableName, lstRowData);
-        } else if (mysqlTableName.equals("tender.bid_project_item")) {
-            Dwd_ItemCollect(mysqlTableName, lstRowData);
-        } else if (mysqlTableName.equals("auction.auction_project_item")) {
-            Dwd_ItemCollect(mysqlTableName, lstRowData);
-        } else if (mysqlTableName.equals("recruit.recruit")) {
-            Dwd_ItemCollect(mysqlTableName, lstRowData);
-        }
+        Executor executor = (Executor) applicationContext.getBean("jobExecutor");
+        executor.execute(new Runnable() {
+            String mysqlTN;
+            List<CanalEntry.RowData> lstRD;
+
+            public Runnable init(String mysqlTN, List<CanalEntry.RowData> lstRD) {
+                this.mysqlTN = mysqlTN;
+                this.lstRD = lstRD;
+                return this;
+            }
+
+            @Override
+            public void run() {
+                try {
+                    if (mysqlTN.equals("purchase.purchase_project_item")) {
+                        Dwd_ItemCollect(mysqlTN, lstRD);
+                    } else if (mysqlTN.equals("tender.bid_project_item")) {
+                        Dwd_ItemCollect(mysqlTN, lstRD);
+                    } else if (mysqlTN.equals("auction.auction_project_item")) {
+                        Dwd_ItemCollect(mysqlTN, lstRD);
+                    } else if (mysqlTN.equals("recruit.recruit")) {
+                        Dwd_ItemCollect(mysqlTN, lstRD);
+                    }
+                } catch (Exception e) {
+                    log.error("", e);
+                }
+            }
+        }.init(mysqlTableName, lstRowData));
         return true;
     }
 
@@ -74,8 +95,27 @@ public class ImportData2Kudu implements IImportData {
 
     private void UpdateData(String operType, String mysqlTableName, List<CanalEntry.RowData> lstRowData) {
         Ods_UpdateData(operType, mysqlTableName, lstRowData);
-        Dwd_DataCollect_DealItem(mysqlTableName, lstRowData);
-        Dwd_DataCollect_QuoteItem(mysqlTableName, lstRowData);
+        Executor executor = (Executor) applicationContext.getBean("jobExecutor");
+        executor.execute(new Runnable() {
+            String mysqlTN;
+            List<CanalEntry.RowData> lstRD;
+
+            public Runnable init(String mysqlTN, List<CanalEntry.RowData> lstRD) {
+                this.mysqlTN = mysqlTN;
+                this.lstRD = lstRD;
+                return this;
+            }
+
+            @Override
+            public void run() {
+                try {
+                    Dwd_DataCollect_DealItem(mysqlTableName, lstRowData);
+                    Dwd_DataCollect_QuoteItem(mysqlTableName, lstRowData);
+                } catch (Exception e) {
+                    log.error("", e);
+                }
+            }
+        }.init(mysqlTableName, lstRowData));
     }
 
     private static String sqlTmp = "upsert into ldydb_transaction.dwd_project_item\n" +
@@ -84,6 +124,7 @@ public class ImportData2Kudu implements IImportData {
     private static String sqlValue = "(%s,%s,%s,%s,%s,%s,%s,%s),";
 
     private boolean Dwd_ItemCollect(String mysqlTableName, List<CanalEntry.RowData> lstRowData) {
+        log.info("开始执行聚集项目采购品信息sql。");
         String project_id = "NULL", project_type_name = "NULL", item_name = "NULL";
         String patition_year = "NULL", directory_id = "NULL", company_id = "NULL";
         String create_time = "NULL", update_time = "NULL";
@@ -265,6 +306,7 @@ public class ImportData2Kudu implements IImportData {
     }
 
     private void Dwd_DataCollect_DealItem(String mysqlTableName, List<CanalEntry.RowData> lstRowData) {
+        log.info("开始执行聚集成交采购品信息sql。");
         List<Long> ids = new ArrayList<>();
         if (mysqlTableName.equals("purchase.purchase_supplier_project_item_origin")) {
             for (CanalEntry.RowData rowData : lstRowData) {
@@ -345,6 +387,7 @@ public class ImportData2Kudu implements IImportData {
     }
 
     private void Dwd_DataCollect_QuoteItem(String mysqlTableName, List<CanalEntry.RowData> lstRowData) {
+        log.info("开始执行聚集报价采购品信息sql。");
         List<Long> ids = new ArrayList<>();
         if (mysqlTableName.equals("purchase.purchase_supplier_project_item_history")) {
             for (CanalEntry.RowData rowData : lstRowData) {

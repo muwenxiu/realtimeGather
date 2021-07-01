@@ -65,7 +65,6 @@ public class AsyncTest {
                     }
                 }
             }.init(j));
-            ;
         }
         log.info("调度结束");
     }
