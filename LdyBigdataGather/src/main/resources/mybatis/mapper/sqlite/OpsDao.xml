@@ -72,7 +72,7 @@
                 and taskStatus = #{status, jdbcType=VARCHAR}
             </if>
         </where>
-        order by BatchId
+        order by runStart
     </select>
 
     <select id="getAnalyseTaskInfo" resultType="ldy.bigdata.gather.entities.AnalyseTaskInfo">
