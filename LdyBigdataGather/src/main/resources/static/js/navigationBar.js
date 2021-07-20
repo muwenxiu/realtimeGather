@@ -1,7 +1,16 @@
 $(function () {
     $("#idCellInfoTree").tree({
         onClick: function (node) {
-            if (node.text == "采集mysql数据库") {
+            if (node.text == "隆道云预警"){
+                $.ajax({
+                    url:'/ldyWarning',
+                    type:'POST',
+                    success:function (data){
+                        $('#center').html(data)
+                    }
+                })
+            }
+            else if (node.text == "采集mysql数据库") {
                 alert("采集mysql数据库");
             } else if (node.text == "采集mysql实例") {
                 //$("#center").load("/realtimeGather_instance");

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="warning">
+    <link rel="stylesheet" type="text/css" th:href="@{/iiipCSS/warning.css}">
+    <script type="text/javascript" src="/js/warning.js"></script>
+    <div class="layoutDivTop">
+        <div id="topLeft" class="layoutDivTopLeft">
+            <span>后台服务预警</span>
+            <div>
+                <table class="easyui-datagrid">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'serverName',width:800">服务名称</th>
+                        <th data-options="field:'serverState',width:200">状态</th>
+                        <th data-options="field:'serverOper',width:150">操作</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div id="topRight" class="layoutDivTopRight">
+            <span>定时采集预警</span>
+            <div>
+                <table class="easyui-datagrid">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'errorBatch',width:100">报错批次</th>
+                        <th data-options="field:'errorTaskID',width:100">报错任务ID</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="layoutDivBottom">
+        <span>数据质量预警</span>
+        <div id="bottomLeft">
+
+        </div>
+        <div id="bottomRight">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

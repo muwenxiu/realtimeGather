@@ -1,0 +1,21 @@
+
+.layoutDivTop{
+    float: top;
+    width: 100%;
+    height: 100px;
+}
+.layoutDivBottom{
+    float:bottom;
+    width: 100%;
+    height: 100%;
+}
+.layoutDivTopLeft{
+    float: left;
+    width: 49%;
+    height: 100px;
+}
+.layoutDivTopRight{
+    float: right;
+    width: 49%;
+    height: 100px;
+}
