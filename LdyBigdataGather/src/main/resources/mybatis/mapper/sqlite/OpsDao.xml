@@ -20,7 +20,7 @@
 
     <select id="gatherBatch" resultType="ldy.bigdata.gather.entities.KeyValue">
         select
-        gatherBatchID as key,
+        case when analyseStatus='ERROR' then analyseStatus else gatherStatus end  as key,
         gatherBatchID as value
         from DataGatherBatch
         <where>

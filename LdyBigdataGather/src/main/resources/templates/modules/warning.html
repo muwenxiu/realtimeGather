@@ -8,30 +8,15 @@
     <link rel="stylesheet" type="text/css" th:href="@{/iiipCSS/warning.css}">
     <script type="text/javascript" src="/js/warning.js"></script>
     <div class="layoutDivTop">
-        <div id="topLeft" class="layoutDivTopLeft">
-            <span>后台服务预警</span>
+        <div id="topLeft" class="layoutDivTopLeft" >
             <div>
-                <table class="easyui-datagrid">
-                    <thead>
-                    <tr>
-                        <th data-options="field:'serverName',width:800">服务名称</th>
-                        <th data-options="field:'serverState',width:200">状态</th>
-                        <th data-options="field:'serverOper',width:150">操作</th>
-                    </tr>
-                    </thead>
-                </table>
+                <table id="serverWarning" class="easyui-datagrid" title="后台服务预警" style="width: 451px">
+                 </table>
             </div>
         </div>
         <div id="topRight" class="layoutDivTopRight">
-            <span>定时采集预警</span>
             <div>
-                <table class="easyui-datagrid">
-                    <thead>
-                    <tr>
-                        <th data-options="field:'errorBatch',width:100">报错批次</th>
-                        <th data-options="field:'errorTaskID',width:100">报错任务ID</th>
-                    </tr>
-                    </thead>
+                <table id="onTimeGatherWarning" class="easyui-datagrid" title="定时采集预警" style="width: 401px">
                 </table>
             </div>
         </div>

@@ -8,6 +8,9 @@ spring:
       prefix: classpath:/templates/
       suffix: .html
   thymeleaf:
+    devtools:
+      livereload:
+        enabled: true
     cache: false
     mode: HTML5
     encoding: UTF-8
