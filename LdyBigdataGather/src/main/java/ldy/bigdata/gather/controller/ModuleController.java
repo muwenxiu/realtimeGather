@@ -17,6 +17,11 @@ public class ModuleController {
     @Autowired
     private InitConfig initConfig;
 
+    @RequestMapping("/ldyWarning")
+    public String ldyWarning(Model model) {
+        return "modules/warning :: warning";
+    }
+
     @RequestMapping("/realtimeGather_instance")
     public String realtimeGather_instance(Model model) {
         return "modules/realtimeGather_instance :: table";
@@ -46,6 +51,7 @@ public class ModuleController {
     public String onTimeGatherBatchDel() {
         return "modules/onTimeGatherBatchDel :: table";
     }
+
     @RequestMapping("/analyseTemplate")
     public String analyseTemplate() {
         return "modules/analyse :: table";

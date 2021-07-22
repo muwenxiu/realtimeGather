@@ -19,6 +19,8 @@ public interface OpsDao {
 
     List<BatchInfo> gatherBatchInfo(long batch);
 
+    List<ServiceInfo> getBackstageService();
+
     List<GatherInfo> gatherInfo(long batch);
 
     String getAnalyseBatchTime(String batch);

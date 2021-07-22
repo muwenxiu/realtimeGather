@@ -11,4 +11,5 @@ import lombok.experimental.Accessors;
 public class ServiceInfo {
     private String backstageServiceName;
     private String backstageServiceStatus;
+    private String backstageServiceStartScript;
 }

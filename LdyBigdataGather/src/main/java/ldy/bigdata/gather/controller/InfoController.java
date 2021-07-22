@@ -3,6 +3,7 @@ package ldy.bigdata.gather.controller;
 import ldy.bigdata.gather.entities.*;
 import ldy.bigdata.gather.mapper.sqlite.OpsDao;
 import ldy.bigdata.gather.service.AsyncService;
+import ldy.bigdata.gather.service.BackstageService;
 import ldy.bigdata.gather.service.InitConfig;
 import ldy.bigdata.gather.service.MysqlTableColumn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,5 +134,21 @@ public class InfoController {
     @RequestMapping("/async")
     public void async() {
         asyncService.executeAsync();
+    }
+
+
+    @RequestMapping("/getBackstageService")
+    public List<ServiceInfo> getBackstageService() {
+        List<ServiceInfo> lst = opsDao.getBackstageService();
+        BackstageService.getBackstageServiceStatus(lst);
+        return lst;
+    }
+
+    // @RequestParam(value = "batchId", required = true) long batchId
+    @RequestMapping("/getRestartService")
+    public boolean getRestartService(
+            @RequestParam(value = "serviceName", required = true) String serviceName,
+            @RequestParam(value = "serviceStartScript", required = true) String serviceStartScript ) {
+        return BackstageService.RestartBackstageServiceStatus(serviceName,serviceStartScript);
     }
 }
