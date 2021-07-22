@@ -114,4 +114,12 @@
     <delete id="delAnalyseTask">
         delete from AnalyseTask where runstart &lt; #{time, jdbcType=VARCHAR}
     </delete>
+    <select id="getBackstageService" resultType="ldy.bigdata.gather.entities.ServiceInfo">
+        select
+            serviceName        as backstageServiceName,
+            serviceStartScript as backstageServiceStartScript,
+            null               as backstageServiceStatus
+        from BackstageService
+        order by serviceName
+    </select>
 </mapper>
