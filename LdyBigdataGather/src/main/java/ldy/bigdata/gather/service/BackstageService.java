@@ -13,6 +13,10 @@ public class BackstageService {
     static final Logger log = LoggerFactory.getLogger(BackstageService.class);
 
     public static void getBackstageServiceStatus(List<ServiceInfo> lstServiceInfo) {
+        if(lstServiceInfo==null)
+        {
+            return;
+        }
         lstServiceInfo.stream().map(
                 (data) -> {
                     List<String> lstLine = ExecComment.exec(new String[]{"/bin/sh", "-c", "ps -ef | grep " + data.getBackstageServiceName()});
