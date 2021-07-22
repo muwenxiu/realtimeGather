@@ -58,12 +58,14 @@ function restartService(index) {
                     url: 'get/getRestartService',
                     data: {serviceName: row.backstageServiceName, serviceStartScript: row.backstageServiceStartScript},
                     success: function (data) {
-                        console.log(data);
+                        if (data) {
+                            $.messager.alert("成功", "重启服务成功");
+                        } else {
+                            $.messager.alert("告警", "重启服务失败");
+                        }
                     },
                     error: function (xhr, textStatus, errorThrown) {
-                        console.log(xhr);
-                        console.log(textStatus);
-                        console.log(errorThrown);
+                        $.messager.alert("告警", "重启服务失败");
                     },
                 }
             );
