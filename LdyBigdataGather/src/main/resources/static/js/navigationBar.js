@@ -8,7 +8,8 @@ $(function () {
                     success:function (data){
                         $('#center').html(data)
                     }
-                })
+                });
+                //console.log("进入”隆道云预警“界面")
             }
             else if (node.text == "采集mysql数据库") {
                 alert("采集mysql数据库");

@@ -59,6 +59,11 @@ function restartService(index) {
                     data: {serviceName: row.backstageServiceName, serviceStartScript: row.backstageServiceStartScript},
                     success: function (data) {
                         if (data) {
+                            $('#serverWarning').datagrid({
+                                loadMsg: "正在加载数据。。。",
+                                url: 'get/getBackstageService',
+                                method: 'post'
+                            });
                             $.messager.alert("成功", "重启服务成功");
                         } else {
                             $.messager.alert("告警", "重启服务失败");
