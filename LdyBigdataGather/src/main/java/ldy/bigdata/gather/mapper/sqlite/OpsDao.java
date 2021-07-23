@@ -33,4 +33,7 @@ public interface OpsDao {
 
     List<MysqlColumnInfo> getMysqlColumnInfo(String mysqlTableName);
 
+    List<OnTimeGatherWarningInfo> getOnTimeGatherWarning();
+
+    List<DatabaseInfoExtend> getGatherTableInfo();
 }
