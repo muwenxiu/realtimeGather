@@ -3,6 +3,7 @@ $(function () {
         //$('#serverWarning').attr("width", "500");
         //console.log($('#serverWarning').attr("width"))
         $('#serverWarning').datagrid({
+            height: 290,
             loadMsg: "正在加载数据。。。",
             url: 'get/getBackstageService',
             //fitColumns:true,//宽度自适应
@@ -33,13 +34,66 @@ $(function () {
             method: 'post'
         });
         $('#onTimeGatherWarning').datagrid({
+            width: 500,
+            height: 290,
             //fitColumns:true,//宽度自适应
+            loadMsg: "正在加载数据。。。",
+            url: 'get/getOnTimeGatherWarning',
             singleSelect: true,
             columns: [[
                 {field: 'errorBatch', width: 200, title: "报错批次"},
                 {field: 'errorTaskID', width: 200, title: "报错任务ID"},
-            ]]
+                {field: 'msg', width: 100, title: "报错任务ID"},
+
+            ]],
+            rowStyler: function (index, row) {
+                if (row.msg === 'ERROR') {
+                    return 'background-color:pink;color:red;font-weight:bold;'
+                }
+            },
         });
+
+        $('#dataQualityOdsWarning').datagrid(
+            {
+                height: 500,
+                width: 600,
+                url: 'get/getDataQualityOdsWarning',
+                singleSelect: true,
+                columns: [[
+                    {field: "tableName", title: "表名", width: 300},
+                    {field: "srcTableCount", title: "Mysql数据量", width: 100},
+                    {field: "tarTableCount", title: "Kudu数据量", width: 100},
+                    {field: "diff", title: "数据量差", width: 100},
+                ]],
+                method: 'post',
+                rowStyler: function (index, row) {
+                    //if (row.msg === 'ERROR') {
+                    //  return 'background-color:pink;color:red;font-weight:bold;'
+                    //}
+                },
+            }
+        );
+        $('#dataQualityDwdWarning').datagrid(
+            {
+                height: 500,
+                width: 560,
+                url: 'get/getDataQualityDwdWarning',
+                singleSelect: true,
+                columns: [[
+                    {field: "tableName", title: "表名", width: 300},
+                    {field: "srcTableCount", title: "Ods数据量", width: 100},
+                    {field: "tarTableCount", title: "Dwd数据量", width: 100},
+                    {field: "diff", title: "数据量差", width: 60},
+                ]],
+                method: 'post',
+                rowStyler: function (index, row) {
+                    //if (row.msg === 'ERROR') {
+                    //  return 'background-color:pink;color:red;font-weight:bold;'
+                    //}
+                },
+            }
+        );
+
     }
 );
 

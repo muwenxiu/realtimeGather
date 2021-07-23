@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 public class test {
     @Test
@@ -18,11 +19,18 @@ public class test {
 
         Path path = Paths.get("E:/");
         for (Path p : Files.newDirectoryStream(path)) {
-            if(!Files.isDirectory(p))
-            {continue;}
-                System.out.println(p.getFileName());
+            if (!Files.isDirectory(p)) {
+                continue;
+            }
+            System.out.println(p.getFileName());
         }
     }
 
-
+    @Test
+    public void methodTest() throws Exception {
+        Function<Integer, String[]> fun = (args) -> new String[args];
+        String[] strs = fun.apply(10);
+        System.out.println(strs.length);
+        System.out.println(strs);
+    }
 }

@@ -2,15 +2,13 @@ package ldy.bigdata.gather.controller;
 
 import ldy.bigdata.gather.entities.*;
 import ldy.bigdata.gather.mapper.sqlite.OpsDao;
-import ldy.bigdata.gather.service.AsyncService;
-import ldy.bigdata.gather.service.BackstageService;
-import ldy.bigdata.gather.service.InitConfig;
-import ldy.bigdata.gather.service.MysqlTableColumn;
+import ldy.bigdata.gather.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -144,11 +142,32 @@ public class InfoController {
         return lst;
     }
 
-    // @RequestParam(value = "batchId", required = true) long batchId
     @RequestMapping("/getRestartService")
     public boolean getRestartService(
             @RequestParam(value = "serviceName", required = true) String serviceName,
-            @RequestParam(value = "serviceStartScript", required = true) String serviceStartScript ) {
-        return BackstageService.RestartBackstageServiceStatus(serviceName,serviceStartScript);
+            @RequestParam(value = "serviceStartScript", required = true) String serviceStartScript) {
+        return BackstageService.RestartBackstageServiceStatus(serviceName, serviceStartScript);
+    }
+
+    @RequestMapping("/getOnTimeGatherWarning")
+    public List<OnTimeGatherWarningInfo> getOnTimeGatherWarning() {
+        List<OnTimeGatherWarningInfo> lst = opsDao.getOnTimeGatherWarning();
+        return lst;
+    }
+
+    @Autowired
+    private DataVerify dataVerify;
+
+    @RequestMapping("/getDataQualityOdsWarning")
+    public List<TableDataCount> getDataQualityOdsWarning() {
+        List<TableDataCount> result = dataVerify.getOdsDataVerify();
+        return result;
+    }
+
+    @RequestMapping("/getDataQualityDwdWarning")
+    public List<TableDataCount> getDataQualityDwdWarning() {
+        List<TableDataCount> result = new ArrayList<>();
+        //TODO
+        return result;
     }
 }

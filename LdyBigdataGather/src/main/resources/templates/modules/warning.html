@@ -8,26 +8,23 @@
     <link rel="stylesheet" type="text/css" th:href="@{/iiipCSS/warning.css}">
     <script type="text/javascript" src="/js/warning.js"></script>
     <div class="layoutDivTop">
-        <div id="topLeft" class="layoutDivTopLeft" >
-            <div>
-                <table id="serverWarning" class="easyui-datagrid" title="后台服务预警" style="width: 455px">
-                 </table>
-            </div>
+        <div id="topLeft" class="layoutDivTopLeft">
+            <table id="serverWarning" class="easyui-datagrid" title="后台服务预警" style="width: 455px">
+            </table>
         </div>
         <div id="topRight" class="layoutDivTopRight">
-            <div>
-                <table id="onTimeGatherWarning" class="easyui-datagrid" title="定时采集预警" style="width: 405px">
-                </table>
-            </div>
+            <table id="onTimeGatherWarning" class="easyui-datagrid" title="定时采集预警" style="width: 405px">
+            </table>
         </div>
     </div>
     <div class="layoutDivBottom">
-        <span>数据质量预警</span>
-        <div id="bottomLeft">
-
+        <div id="bottomLeft" class="bottomLeft">
+            <table id="dataQualityOdsWarning" class="easyui-datagrid" title="Ods层数据预警" style="width: 455px">
+            </table>
         </div>
-        <div id="bottomRight">
-
+        <div id="bottomRight" class="bottomRight">
+            <table id="dataQualityDwdWarning" class="easyui-datagrid" title="Dwd层数据预警" style="width: 455px">
+            </table>
         </div>
     </div>
 </div>

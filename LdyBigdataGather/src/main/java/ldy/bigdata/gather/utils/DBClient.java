@@ -130,9 +130,9 @@ public class DBClient {
             while (resultSet.next()) {
                 Map<String, String> r = new HashMap<>();
                 for (int i = 0; i < metaData.getColumnCount(); i++) {
-                    String columnName=metaData.getColumnName(i+1);
+                    String columnName = metaData.getColumnName(i + 1);
                     String value = resultSet.getString(columnName);
-                    r.put(columnName,value);
+                    r.put(columnName, value);
                 }
                 result.add(r);
             }
@@ -154,5 +154,41 @@ public class DBClient {
             }
         }
         return result;
+    }
+
+    public Map<String, String> executeOne(String sql) {
+        Connection connection = null;
+        Statement statement = null;
+        Map<String, String> r = new HashMap<>(10);
+        try {
+            connection = getConnection();
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            if (resultSet.next()) {
+                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                    String columnName = metaData.getColumnName(i + 1);
+                    String value = resultSet.getString(columnName);
+                    r.put(columnName, value);
+                }
+            }
+        } catch (Exception e) {
+            log.error("数据封装失败！", e);
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException se2) {
+            }
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return r;
     }
 }

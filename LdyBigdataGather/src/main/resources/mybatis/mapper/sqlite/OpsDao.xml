@@ -20,7 +20,7 @@
 
     <select id="gatherBatch" resultType="ldy.bigdata.gather.entities.KeyValue">
         select
-        case when analyseStatus='ERROR' then analyseStatus else gatherStatus end  as key,
+        case when analyseStatus='ERROR' then analyseStatus else gatherStatus end as key,
         gatherBatchID as value
         from DataGatherBatch
         <where>
@@ -112,14 +112,37 @@
         where BatchId = #{batch, jdbcType=VARCHAR}
     </select>
     <delete id="delAnalyseTask">
-        delete from AnalyseTask where runstart &lt; #{time, jdbcType=VARCHAR}
+        delete
+        from AnalyseTask
+        where runstart &lt; #{time, jdbcType=VARCHAR}
     </delete>
     <select id="getBackstageService" resultType="ldy.bigdata.gather.entities.ServiceInfo">
-        select
-            serviceName        as backstageServiceName,
-            serviceStartScript as backstageServiceStartScript,
-            null               as backstageServiceStatus
+        select serviceName        as backstageServiceName,
+               serviceStartScript as backstageServiceStartScript,
+               null               as backstageServiceStatus
         from BackstageService
         order by serviceName
     </select>
+
+    <select id="getOnTimeGatherWarning" resultType="ldy.bigdata.gather.entities.OnTimeGatherWarningInfo">
+        select batchId AS errorBatch,
+               task_id AS errorTaskID,
+               'ERROR' AS msg
+        from DataGatherTask
+        where taskStatus = 'ERROR'
+        order by batchId, task_id
+    </select>
+    <select id="getGatherTableInfo" resultType="ldy.bigdata.gather.entities.DatabaseInfoExtend">
+        select mysqlUrl  as ip,
+               mysqlPort as port,
+               mysqlUser as user,
+               mysqlPwd  as pwd,
+               mysqlDataBase as dataBase,
+               mysqlDataBase||'.'|| tableName as tableName,
+               kudoDataBase||'.ods_'||preFiveDB||tableName as kuduTableName
+        from DataGatherConfigPE
+        where isRealTime=1
+
+    </select>
+
 </mapper>
