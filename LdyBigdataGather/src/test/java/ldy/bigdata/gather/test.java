@@ -33,4 +33,10 @@ public class test {
         System.out.println(strs.length);
         System.out.println(strs);
     }
+    @Test
+    public void methodTest2() throws Exception {
+      String  type="BIGINT(12)";
+      System.out.println(type.contains("INT"));
+
+    }
 }

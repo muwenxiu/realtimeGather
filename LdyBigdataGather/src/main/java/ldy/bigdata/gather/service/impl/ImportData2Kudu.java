@@ -129,22 +129,22 @@ public class ImportData2Kudu implements IImportData {
         }
         for (CanalEntry.RowData rowData : lstRowData) {
             List<Column> columns = rowData.getBeforeColumnsList();
-            String where = " where ";
+            String where = "  where ";
             for (Column column : columns) {
                 String columnName = column.getName().toLowerCase();
                 if (column.getIsKey()) {
-                    String type = column.getMysqlType();
-                    if (type == "INT" || type == "BIGINT" || type == "DOUBLE" || type == "FLOAT") {
+                    String type = column.getMysqlType().toUpperCase();
+                    if (type.contains("INT") || type.contains("DOUBLE") || type.contains("FLOAT")) {
                         where = where + columnName + " = " + column.getValue();
                     } else {
                         where = where + columnName + " = '" + column.getValue() + "'";
                     }
                 }
                 if (partitionColumn != null && columnName.equals(partitionColumn)) {
-                    where = where + "  and  " + column.getValue().substring(0, 4);
+                    where = where + "  and  create_year = " + column.getValue().substring(0, 4);
                 }
             }
-            String delSql = "delete from kuduTableName " + where;
+            String delSql = "delete from  " + kuduTableName + where;
             log.info(delSql);
             executeSql(delSql);
         }
