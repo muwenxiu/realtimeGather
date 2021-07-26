@@ -139,7 +139,8 @@
                mysqlPwd  as pwd,
                mysqlDataBase as dataBase,
                mysqlDataBase||'.'|| tableName as tableName,
-               kudoDataBase||'.ods_'||preFiveDB||tableName as kuduTableName
+               kudoDataBase||'.ods_'||preFiveDB||tableName as kuduTableName,
+               partitionColumn
         from DataGatherConfigPE
         where isRealTime=1
 

@@ -9,4 +9,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class DatabaseInfoExtend extends DatabaseInfo {
     private String kuduTableName;
+    private String partitionColumn;
 }

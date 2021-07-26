@@ -79,8 +79,9 @@ public class canalTest {
             }
 
             EventType eventType = rowChage.getEventType();
-            if (!entry.getHeader().getSchemaName().equals("test")) {
-                //continue;
+            String schemaName = entry.getHeader().getSchemaName();
+            if (!schemaName.equals("test")) {
+                continue;
             }
             System.out.println(String.format("================&gt; binlog[%s:%s] , name[%s,%s] , eventType : %s",
                     entry.getHeader().getLogfileName(), entry.getHeader().getLogfileOffset(),
@@ -104,7 +105,7 @@ public class canalTest {
 
     private static void printColumn(List<Column> columns) {
         for (Column column : columns) {
-            System.out.printf("%-10s:%-20s  %-20s update=%s \n", column.getName(), column.getValue(), column.getMysqlType(), column.getUpdated());
+            System.out.printf("%-10s:%-20s  %-20s update=%s isKey=%s\n", column.getName(), column.getValue(), column.getMysqlType(), column.getUpdated(), column.getIsKey());
         }
     }
 }

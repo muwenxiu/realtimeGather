@@ -24,6 +24,7 @@ import com.alibaba.otter.canal.protocol.CanalEntry.Column;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.Executor;
 
 @Service("ImportData2Kudu")
@@ -90,6 +91,7 @@ public class ImportData2Kudu implements IImportData {
 
     @Override
     public boolean delete(String mysqlTableName, List<CanalEntry.RowData> lstRowData) {
+        deleteData(mysqlTableName, lstRowData);
         return true;
     }
 
@@ -116,6 +118,36 @@ public class ImportData2Kudu implements IImportData {
                 }
             }
         }.init(mysqlTableName, lstRowData));
+    }
+
+    private void deleteData(String mysqlTableName, List<CanalEntry.RowData> lstRowData) {
+
+        String kuduTableName = sysInit.getKuduTableName(mysqlTableName);
+        String partitionColumn = sysInit.getKuduPartitionColumn(kuduTableName);
+        if (partitionColumn != null) {
+            partitionColumn = partitionColumn.toLowerCase();
+        }
+        for (CanalEntry.RowData rowData : lstRowData) {
+            List<Column> columns = rowData.getBeforeColumnsList();
+            String where = " where ";
+            for (Column column : columns) {
+                String columnName = column.getName().toLowerCase();
+                if (column.getIsKey()) {
+                    String type = column.getMysqlType();
+                    if (type == "INT" || type == "BIGINT" || type == "DOUBLE" || type == "FLOAT") {
+                        where = where + columnName + " = " + column.getValue();
+                    } else {
+                        where = where + columnName + " = '" + column.getValue() + "'";
+                    }
+                }
+                if (partitionColumn != null && columnName.equals(partitionColumn)) {
+                    where = where + "  and  " + column.getValue().substring(0, 4);
+                }
+            }
+            String delSql = "delete from kuduTableName " + where;
+            log.info(delSql);
+            executeSql(delSql);
+        }
     }
 
     private static String sqlTmp = "upsert into ldydb_transaction.dwd_project_item\n" +
