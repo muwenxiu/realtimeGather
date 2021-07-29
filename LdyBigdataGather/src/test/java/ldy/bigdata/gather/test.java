@@ -35,8 +35,9 @@ public class test {
     }
     @Test
     public void methodTest2() throws Exception {
-      String  type="BIGINT(12)";
-      System.out.println(type.contains("INT"));
+      String  type="s.b";
+      String[] s=type.split("\\.");
+      System.out.println(s);
 
     }
 }

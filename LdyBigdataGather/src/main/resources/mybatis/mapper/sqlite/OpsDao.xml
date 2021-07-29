@@ -133,7 +133,8 @@
         order by batchId, task_id
     </select>
     <select id="getGatherTableInfo" resultType="ldy.bigdata.gather.entities.DatabaseInfoExtend">
-        select mysqlUrl  as ip,
+        select id ,
+               mysqlUrl  as ip,
                mysqlPort as port,
                mysqlUser as user,
                mysqlPwd  as pwd,
@@ -143,7 +144,32 @@
                partitionColumn
         from DataGatherConfigPE
         where isRealTime=1
-
+    </select>
+    <select id="getGatherTableInfoByTableName" resultType="ldy.bigdata.gather.entities.DatabaseInfoExtend">
+        select id ,
+               mysqlUrl  as ip,
+               mysqlPort as port,
+               mysqlUser as user,
+               mysqlPwd  as pwd,
+               mysqlDataBase as dataBase,
+               mysqlDataBase||'.'|| tableName as tableName,
+               kudoDataBase||'.ods_'||preFiveDB||tableName as kuduTableName,
+               partitionColumn
+        from DataGatherConfigPE
+        where isRealTime=1
+            and mysqlDataBase=#{dataBase, jdbcType=VARCHAR}
+            and tableName=#{tableName, jdbcType=VARCHAR}
     </select>
 
+    <select id="getGatherProgress" resultType="java.lang.String">
+        select
+                'task_id='||task_id ||'   startGather='||startGather||
+                '    endGather='|| endGather||'   taskStatus='||ifnull( taskStatus,'NULL') ||
+                '   batchId='|| ifnull(batchId,'NULL') ||
+                '   selectCnt='|| ifnull(selectCnt,'NULL') ||'  insertCnt=' ||ifnull(insertCnt,'NULL')
+        from DataGatherTask
+        where task_id=#{task_id, jdbcType=BIGINT}
+          and startGather=#{startGather, jdbcType=VARCHAR}
+          and endGather=#{endGather, jdbcType=VARCHAR}
+    </select>
 </mapper>

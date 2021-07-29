@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class DatabaseInfo {
+    private String id;
     private String ip;
     private int port;
     private String user;

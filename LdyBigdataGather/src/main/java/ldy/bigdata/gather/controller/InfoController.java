@@ -170,4 +170,108 @@ public class InfoController {
         //TODO
         return result;
     }
+
+    @RequestMapping("/getTableDataQualityMonth")
+    public List<TableDataCount> getTableDataQualityMonth(
+            @RequestParam String mysqlTableName
+    ) {
+        List<TableDataCount> result = dataVerify.getDataQualityWarning_Month(mysqlTableName);
+        return result;
+    }
+
+    @RequestMapping("/getTableDataQualityDay")
+    public List<TableDataCount> getTableDataQualityDay(
+            @RequestParam String mysqlTableName,
+            @RequestParam String dataDate
+    ) {
+        List<TableDataCount> result = dataVerify.getDataQualityWarning_Day(mysqlTableName, dataDate);
+        return result;
+    }
+
+    /***
+     * 重新采集：按照月重新采集
+     * @param mysqlTableName
+     * @param dataDate
+     * @return
+     */
+    @RequestMapping("/reGatherData_month")
+    public boolean reGatherData_month(
+            @RequestParam(value = "mysqlTableName") String mysqlTableName,
+            @RequestParam(value = "dataDate") String dataDate
+    ) {
+        List<TableDataCount> result = dataVerify.getDataQualityWarning_Day(mysqlTableName, dataDate);
+        return true;
+    }
+
+    @RequestMapping("/reGatherData_month_deleteSql")
+    public String reGatherData_month_deleteSql(
+            @RequestParam(value = "mysqlTableName") String mysqlTableName,
+            @RequestParam(value = "dataDate") String dataDate
+    ) {
+        return dataVerify.reGatherData_month_deleteSql(mysqlTableName, dataDate);
+
+    }
+
+    @RequestMapping("/reGatherData_month_insertSql")
+    public String reGatherData_month_insertSql(
+            @RequestParam(value = "mysqlTableName") String mysqlTableName,
+            @RequestParam(value = "dataDate") String dataDate
+    ) {
+        return dataVerify.reGatherData_month_insertSql(mysqlTableName, dataDate);
+
+    }
+
+    @RequestMapping("/getGatherProgress")
+    public String getGatherProgress(
+            @RequestParam(value = "mysqlTableName") String mysqlTableName,
+            @RequestParam(value = "dataDate") String dataDate
+    ) {
+        return  dataVerify.getGatherProgress(mysqlTableName, dataDate);
+    }
+
+    /***
+     * 重新采集：按照月叠加采集
+     * @param mysqlTableName
+     * @param dataDate
+     * @return
+     */
+    @RequestMapping("/recoverGather_month")
+    public boolean recoverGather_month(
+            @RequestParam(value = "mysqlTableName") String mysqlTableName,
+            @RequestParam(value = "dataDate") String dataDate
+    ) {
+        List<TableDataCount> result = dataVerify.getDataQualityWarning_Day(mysqlTableName, dataDate);
+        return true;
+    }
+
+    /***
+     * 重新采集：按照日重新采集
+     * @param mysqlTableName
+     * @param dataDate
+     * @return
+     */
+    @RequestMapping("/reGatherData_day")
+    public boolean reGatherData_day(
+            @RequestParam(value = "mysqlTableName") String mysqlTableName,
+            @RequestParam(value = "dataDate") String dataDate
+    ) {
+        List<TableDataCount> result = dataVerify.getDataQualityWarning_Day(mysqlTableName, dataDate);
+        return true;
+    }
+
+    /***
+     * 重新采集：按照日叠加采集
+     * @param mysqlTableName
+     * @param dataDate
+     * @return
+     */
+    @RequestMapping("/recoverGather_day")
+    public boolean recoverGather_day(
+            @RequestParam(value = "mysqlTableName") String mysqlTableName,
+            @RequestParam(value = "dataDate") String dataDate
+    ) {
+        List<TableDataCount> result = dataVerify.getDataQualityWarning_Day(mysqlTableName, dataDate);
+        return true;
+    }
+
 }

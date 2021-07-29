@@ -36,4 +36,8 @@ public interface OpsDao {
     List<OnTimeGatherWarningInfo> getOnTimeGatherWarning();
 
     List<DatabaseInfoExtend> getGatherTableInfo();
+
+    DatabaseInfoExtend getGatherTableInfoByTableName(String dataBase, String tableName);
+
+    String getGatherProgress(int task_id, String startGather, String endGather);
 }

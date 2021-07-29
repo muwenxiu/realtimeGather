@@ -1,4 +1,4 @@
-//# sourceURL=dynamicScript.js
+//# sourceURL=warning.js
 $(function () {
         //$('#serverWarning').attr("width", "500");
         //console.log($('#serverWarning').attr("width"))
@@ -31,7 +31,10 @@ $(function () {
                 },
                 {field: "backstageServiceStartScript", title: "操作", hidden: true},
             ]],
-            method: 'post'
+            method: 'post',
+            onDblClickRow: function (rowIndex, rowData) {
+               window.open('warningData?mysqlTableName=tender.bid_supplier_origin');
+            }
         });
         $('#onTimeGatherWarning').datagrid({
             width: 500,

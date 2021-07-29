@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>表数据量预警操作</title>
+    <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/js/warning_data.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css"/>
+    <link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css"/>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .header {
+            background-color: #f1f1f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .clearfix:after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .box {
+            float: left;
+            width: 50%;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<div id="idTop" class="header"><h2 th:text="'MysqlTable名称：' + ${mysqlTableName}"></h2></div>
+<p id="mysqlTableName" hidden="hidden" th:text="${mysqlTableName}">
+<div class="clearfix">
+    <div class="box">
+        <table id="dataQuality_Warning_Correction_Month" class="easyui-datagrid" title="月数据质量分析预警及修正">
+        </table>
+    </div>
+    <div class="box">
+        <table id="dataQuality_Warning_Correction_Day" class="easyui-datagrid" title="日数据质量分析预警及修正">
+        </table>
+    </div>
+</div>
+<div id="dd" style="padding:5px;width:400px;height:200px;"
+     title="My Dialog" iconCls="icon-ok"
+     buttons="#dlg-buttons">
+    <input id="dd_delete" class="easyui-textbox">
+    <input id="dd_insert" class="easyui-textbox">
+    <p>采集进度</p>
+    <div>
+        <p id="gatherProgress">进度：</p>
+        <a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="getGatherProgress()">刷新</a>
+    </div>
+</div>
+
+<div id="dlg-buttons">
+    <a id="dd_Gather_start" href="#" class="easyui-linkbutton" onclick="onClickGather_start()"
+       iconCls="icon-ok">重新采集</a>
+    <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dd').dialog('close')">取消</a>
+</div>
+</body>
+</html>

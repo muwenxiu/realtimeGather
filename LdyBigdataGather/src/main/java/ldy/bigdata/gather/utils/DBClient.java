@@ -191,4 +191,42 @@ public class DBClient {
         }
         return r;
     }
+
+    public List<Map<String, String>> executeMore(String sql) {
+        Connection connection = null;
+        Statement statement = null;
+        List<Map<String, String>> result = new ArrayList<>(100);
+        try {
+            connection = getConnection();
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            while (resultSet.next()) {
+                Map<String, String> row = new HashMap<>(10);
+                for (int i = 0; i < metaData.getColumnCount(); i++) {
+                    String columnName = metaData.getColumnName(i + 1);
+                    String value = resultSet.getString(columnName);
+                    row.put(columnName, value);
+                }
+                result.add(row);
+            }
+        } catch (Exception e) {
+            log.error("数据封装失败！", e);
+        } finally {
+            try {
+                if (statement != null) {
+                    statement.close();
+                }
+            } catch (SQLException se2) {
+            }
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return result;
+    }
 }

@@ -8,13 +8,14 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class TableDataCount {
+    private String dataDate;
     private String tableName;
     private int srcTableCount;
     private int tarTableCount;
     private boolean getCntError;
     private int diff;
-    public int getDiff()
-    {
-        return srcTableCount-tarTableCount;
+
+    public int getDiff() {
+        return srcTableCount - tarTableCount;
     }
 }
